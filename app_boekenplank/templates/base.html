@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static '/assets/css/all.css'%} ">
+    <link rel="stylesheet" href="{% static '/css/mystyle.css' %}">
+    
+
+
+    <title>{%block title%} {% endblock %}</title>
+</head>
+<body>
+
+    <!-- Header MENU -->
+    <div class="row">
+        <div class="header-container">
+            <div class="column-40">
+                
+                <a  class="link" href="{% url 'index' %}"><h1>LOGO WESSEL</h1></a>                 
+            </div>
+            
+            <div class="column-60">
+                <div class="menu-container">
+                    <nav>
+                        <div class="main-menu">
+                            
+                            <ul class="main-menu-list">
+                                
+                                <div class="hamburger-menu-icon-container">
+                                    <a href="#hamburger-menu" class="link">
+                                        <li class="hamburger-menu-open menu-icon" id="hamburger"> 
+                                    
+                                            <i class="fa-solid fa-bars"></i>
+                                        </li>
+                                    </a>
+                                </div>
+                                
+                                <div id="hamburger-menu">
+                                    <a href="#" class="link">
+                                        <li class="hamburger-menu-close menu-icon" id="close_hamburger_menu">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </li>
+                                    </a>
+                                    <li class="menu-item"><a  class="link" href="{% url 'index' %}"> Home</li></a>
+                                    {%if request.user.is_authenticated %}
+                                        <li class="menu-item"><a  class="link" href="{% url 'add_books' %}"> Add Book</li></a>
+                                    {% else %}
+                                                                        
+                                    {%endif%}
+                                    <li class="menu-item"><a class="link" href="{% url 'about' %}">About</li></a>
+                                    <li class="menu-item"><a class="link" href="{% url 'contact' %}">Contact</li></a>
+                                    
+                                    <li class="menu-item"><a  class="link" href="{% url 'account' %}">   
+                                        <div class="dropdown">
+                                            <!-- <button class="dropbtn">Dropdown</button> -->
+                                            <i class="fa-solid fa-image-portrait fa-2x p-3 mb-4 tm-about-icon dropdown"></i>
+                                            <div class="dropdown-content">  
+                                            {%if request.user.is_authenticated %}
+                                                <a  class="link" href="{% url 'account' %}">Account</a>
+                                                <a  class="link" href="{% url 'add_books' %}">Add Book</a>
+                                                
+                                            {% else %}
+                                                
+                                            <a  class="link" href="{% url 'account' %}">Login</a>
+                                            {%endif%}
+                                            </div>
+                                        </div>      
+                                    </li>    
+                                </div>
+
+                                <div class="header-menu">
+                                    <li class="menu-item"><a  class="link" href="{% url 'index' %}"> Home</li></a>
+                                    {%if request.user.is_authenticated %}
+                                        <li class="menu-item"><a  class="link" href="{% url 'add_books' %}"> Add Book</li></a>
+                                    {% else %}
+                                                                        
+                                    {%endif%}
+                                    <li class="menu-item"><a class="link" href="{% url 'about' %}">About</li></a>
+                                    <li class="menu-item"><a class="link" href="{% url 'contact' %}">Contact</li></a>
+                                    <li class="menu-item"><a  class="link" href="{% url 'account' %}">   
+                                        <div class="dropdown">
+                                            <!-- <button class="dropbtn">Dropdown</button> -->
+                                            <i class="fa-solid fa-image-portrait fa-2x p-3 mb-4 tm-about-icon dropdown"></i>
+                                            <div class="dropdown-content">  
+                                            {%if request.user.is_authenticated %}
+                                                <a  class="link" href="{% url 'account' %}">Account</a>
+                                                <a  class="link" href="{% url 'add_books' %}">Add Book</a>
+                                                
+                                            {% else %}
+                                                
+                                            <a  class="link" href="{% url 'account' %}">Login</a>
+                                            {%endif%}
+                                            </div>
+                                        </div>      
+                                    </li>
+                                </div>
+                                
+                                
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- HERO  -->
+    <div class="hero-wrapper">
+        <!-- MENU -->
+
+        <div class="hero-content">
+
+            <div class="hero-content-wrapper">
+                <div class="text-blok-container">
+                    <h1>CONTENT COMES HERE</h1>
+                </div>
+                <div class="btn-container">
+                    <div class="btn">
+                        <a href="" target="_blank" rel="noopener noreferrer">text</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HERO VIDEO -->
+        <!-- <div class="hero-video-wrapper">
+            
+            <video autoplay="" muted="" loop="" class="hero-video">
+                <source src="wheat-field.mp4" type="video/mp4">
+            </video>
+        </div> -->
+    </div>
+  
+    <!-- Content -->
+
+    {% block content%}
+
+    {%endblock%}
+    <!-- Link bloks -->
+    <div class="footer-block-container">
+        <div class="nieuws-letter-block column-50 info-block">
+            <div class="item-title">
+                
+                <h3>Write a review</h3>
+                
+            </div>
+            <div class="item-content">
+                Let us know how we can develop
+            </div>
+
+            <div class="form-container">
+                <form action="" method="post">
+                    
+                    <input type="text" name="feedback" id="" class="form-text">
+                    <input type="submit" value="Submit" class="form-submit">
+                </form>
+            </div>
+        </div>
+
+        <div class="info-block column-25">
+            <div class="item-title">
+                <h3>Andere links</h3>
+            </div>
+            
+            <ul class="link-container">
+                <li class="link">link</li>
+                <li class="link">link</li>
+                <li class="link">link</li>
+            </ul>
+        </div>
+        <div class="info-block column-25">
+            <div class="item-title">
+                <h3>Social Media</h3>
+            </div>
+            
+            <ul class="link-container">
+                <li class="link">link</li>
+                <li class="link">link</li>
+                <li class="link">link</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <footer class="footer">
+            <div>
+                <p>
+                    Copyright 2022
+                    - Designed by
+                    <a href="https://www.linkedin.com/in/wessel-rooth-683856137/" rel="nofollow" target="_parent">Wessel Rooth</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+<script src="{% static '/js/code.js' %}"></script>
+</body>
+</html>

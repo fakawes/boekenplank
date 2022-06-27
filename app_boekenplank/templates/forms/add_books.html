@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Book{% endblock %}
+{% block content%}
+
+
+<div class="add-item-form-container">
+    <div class="icon-container">
+        
+        <i class="fa-solid fa-pen-clip fa-5x p-3 mb-4 add-item-icon" id="add-review-icon"></i>
+        <i class="fa-solid fa-arrow-up fa-5x p-3 mb-4 add-item-icon close-form" id="close-review-icon"></i>
+        <h3>Add Book Review</h3>
+    </div>
+    
+    <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-review-form">
+        {% csrf_token %}
+        {{add_review_form}}
+        <p>didn't find the book you red? Add it <a href="#add-book-icon">here</a> </p>
+        <input type="submit" value="SUBMIT" name="add_review_form">
+    </form>
+</div>
+
+<div class="add-item-form-container">
+    <div class="icon-container">
+        <i class="fa-solid fa-book fa-5x p-3 mb-4 add-item-icon" id="add-book-icon"></i>
+        <i class="fa-solid fa-arrow-up fa-5x p-3 mb-4 add-item-icon close-form" id="close-book-icon"></i>
+        <h3>Add Book</h3>
+    </div>
+
+    <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-book-form">
+        {% csrf_token %}
+        {{add_book_form}}
+
+        <p>didn't find the right author of your book? add him/her?  <a href="#add-author-icon">here</a> </p>
+        <p>didn't find the right publisher of your book? add him?  <a href="#add-publisher-icon">here</a> </p>
+        <input type="submit" value="SUBMIT" name="add_book_form">
+    </form>
+</div>
+
+<div class="add-item-form-container">
+    <div class="icon-container">
+        
+        <i class="fa-solid fa-user-pen fa-5x p-3 mb-4 add-item-icon" id="add-author-icon"></i>
+        <i class="fa-solid fa-arrow-up fa-5x p-3 mb-4 add-item-icon close-form" id="close-author-icon"></i>
+        <h3>Add Author</h3>
+        
+    </div>
+    
+
+    <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-author-form">
+        {% csrf_token %}
+        {{add_author_form }}
+        <input type="submit" value="SUBMIT" name="add_author_form">
+    </form>
+</div>
+
+
+<div class="add-item-form-container">
+    <div class="icon-container">
+        <i class="fa-solid fa-building fa-5x p-3 mb-4 add-item-icon" id="add-publisher-icon"></i>
+        <i class="fa-solid fa-arrow-up fa-5x p-3 mb-4 add-item-icon close-form" id="close-publisher-icon"></i>
+        <h3>Add Publisher</h3>
+    </div>
+    
+    <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-publisher-form">
+        {% csrf_token %}
+        {%for field in add_publisher_form %}
+            {{field.label}}
+            {{field}}
+            <br>
+        {%endfor%}
+        
+        
+        <input type="submit" value="SUBMIT" name="add_publisher_form">
+    </form>
+</div> 
+
+
+{%endblock%}

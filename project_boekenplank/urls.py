@@ -12,14 +12,27 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    
 """
+from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path
-
-
+from django.conf.urls.static import static
+from django.conf import settings
 from app_boekenplank import views
+from django.urls import include,path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index_view)
+    path('',views.IndexView.as_view(), name='index' ),
+    path('about/', views.AboutView.as_view(), name='about'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
+    path('add_books/', views.AddBooks.as_view(), name='add_books'),
+    path('accounts/', include('allauth.urls')),
+    path('account/', views.AccountView.as_view(), name='account'),
+    path('account/edit', views.EditAccountView.as_view(), name='edit-account'),
+    path('test/',views.CreateCategoryView.as_view()),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
