@@ -62,7 +62,7 @@
                                             {%if request.user.is_authenticated %}
                                                 <a  class="link" href="{% url 'account' %}">Account</a>
                                                 <a  class="link" href="{% url 'add_books' %}">Add Book</a>
-                                                
+                                                <a  class="link" href="/accounts/logout">Logout</a>
                                             {% else %}
                                                 
                                             <a  class="link" href="{% url 'account' %}">Login</a>
@@ -89,7 +89,7 @@
                                             {%if request.user.is_authenticated %}
                                                 <a  class="link" href="{% url 'account' %}">Account</a>
                                                 <a  class="link" href="{% url 'add_books' %}">Add Book</a>
-                                                
+                                                <a  class="link" href="/accounts/logout">Logout</a>
                                             {% else %}
                                                 
                                             <a  class="link" href="{% url 'account' %}">Login</a>
@@ -152,10 +152,10 @@
             </div>
 
             <div class="form-container">
-                <form action="" method="post">
+                <form action="" method="post" class="footer-form">
                     
                     <input type="text" name="feedback" id="" class="form-text">
-                    <input type="submit" value="Submit" class="form-submit">
+                    <input type="submit" value="Submit" class="">
                 </form>
             </div>
         </div>
