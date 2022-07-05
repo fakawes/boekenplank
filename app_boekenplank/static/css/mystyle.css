@@ -350,6 +350,18 @@ h1{
 .catalog-text{
     line-height: 2;
 }
+
+/* <------Author highlight blocks */
+.author-grid-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 0px 20px 0px 20px;
+    margin: 20px 0px;
+}
+.author-image, .about-author{
+    height: 100%;
+}
 /* INFORMATION BLOCKS */
 .footer-block-container{
     margin: 0px 100px 0px 100px;

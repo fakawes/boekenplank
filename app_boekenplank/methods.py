@@ -3,15 +3,51 @@ from django.db.models import Count
 
 #return random review list of most review book
 def most_reviewed_books():
-    book_query_collection = Book.objects.values('title','id').annotate(num_reviews = Count('bookreview')).order_by('-num_reviews')[:3]
-    book_collection  = []
+    book_query_collection = Book.objects.all()
+    book_collection  = {}
     for book in book_query_collection:
-        
-        if book['num_reviews'] != 0:
-            random_review = BookReview.objects.filter(book=book['id']).order_by('?').first()
-            book_collection.append(random_review)
+        bookreviews = book.bookreview_set.filter(book=book)
+        for review in bookreviews:
+            
+            if book.id in book_collection.keys():
+                book_collection[book.id]['score'] += review.score    
+                book_collection[book.id]['num_reviews'] += 1
+            else:
+                book_collection[book.id] = {}
+                book_collection[book.id]['score'] = review.score
+                book_collection[book.id]['num_reviews'] = 1             
+    for book in book_collection.values():
+        book['score'] = book['score'] / book['num_reviews']
+
+    sortedDict = []
     
-    return book_collection
+    book_collection = book_collection
+    
+    while book_collection:
+        
+        firstKey = list(book_collection.keys())[0]
+        
+        minScore = book_collection[firstKey]['score']
+        
+        for item in book_collection.items():
+            
+            if item[1]['score'] <= minScore:
+                minScore = item[1]['score']
+        
+        sortedDict.append(item)        
+        book_collection.pop(firstKey)
+    
+    #add book object to dict
+    for i in sortedDict:
+        key = i[0]
+        value = i[1]
+        
+        book_object = Book.objects.get(pk=key)
+        
+        value['book'] = book_object
+        
+    return sortedDict
+    
 
 #get book of each category, most red first
 def category_books():
@@ -29,10 +65,12 @@ def category_books():
 #return a random book of a author
 def author_books():
         
-    book = None
+    # book = None
 
-    while book == None:
-        author = Author.objects.filter().order_by('?').first()
-        book = Book.objects.filter(author=author).first()
-        
-    return book
+    # while book == None:
+    #     author = Author.objects.filter().order_by('?').first()
+    #     book = Book.objects.filter(author=author).first()
+    
+    author = Author.objects.get(pk=5)
+    
+    return author

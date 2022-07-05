@@ -3,7 +3,7 @@ from msilib.schema import Class
 from urllib import request
 from webbrowser import get
 from django.shortcuts import redirect, render
-from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm
+from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm
 from app_boekenplank.models import Book,BookReview, Author, Category, Publisher, Author
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,19 +21,41 @@ from app_boekenplank.methods import most_reviewed_books, category_books, author_
 class IndexView(TemplateView):
     template_name = 'index.html'
     
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.get_context_data())
+    
     def get_context_data(self, **kwargs):
+        kwargs['book_collection'] = most_reviewed_books()
+        kwargs['category_collection'] = category_books()
+        kwargs['author'] = author_books()
+        
+        if 'newsLetterForm' not in kwargs.keys():
+            kwargs['newsLetterForm'] = newsLetterForm()
+        
+        
+        print(kwargs['book_collection'])
+        
+        return kwargs
+    
+    def post(self, request, *args, **kwargs):
         context = {}
-        context['book_collection'] = most_reviewed_books()
-        context['category_collection'] = category_books()
-        context['author_book'] = author_books()
+        
+        if 'newsLetterForm' in request.POST:
+            form = newsLetterForm(request.POST)
+            if form.valid:
+                return redirect('/')
+            else:
+                context['newsLetterForm'] = form
         
         return context
-    
     
 class AboutView(TemplateView):
     template_name = 'about.html'
 
-class ContactView(TemplateView):
+class ContactView(FormView):
+    form_class = contactForm
+    
     template_name = 'contact.html'
 
 # MAAK HIER EEN FORM VIEW VAN

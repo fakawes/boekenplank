@@ -148,13 +148,14 @@
                 
             </div>
             <div class="item-content">
-                Let us know how we can develop
+                Sign in for our news letter
             </div>
 
             <div class="form-container">
+                
                 <form action="" method="post" class="footer-form">
-                    
-                    <input type="text" name="feedback" id="" class="form-text">
+                    {% csrf_token %}
+                    {{newsLetterForm}}
                     <input type="submit" value="Submit" class="">
                 </form>
             </div>

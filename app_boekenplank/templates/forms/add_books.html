@@ -39,12 +39,11 @@
 </div>
 
 <div class="add-item-form-container">
-    <div class="icon-container">
-        
+    <div class="icon-container">   
         <i class="fa-solid fa-user-pen fa-5x p-3 mb-4 add-item-icon" id="add-author-icon"></i>
         <i class="fa-solid fa-arrow-up fa-5x p-3 mb-4 add-item-icon close-form" id="close-author-icon"></i>
         <h3>Add Author</h3>
-        
+
     </div>
     
 
@@ -65,13 +64,7 @@
     
     <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-publisher-form">
         {% csrf_token %}
-        {%for field in add_publisher_form %}
-            {{field.label}}
-            {{field}}
-            <br>
-        {%endfor%}
-        
-        
+        {{add_publisher_form}}        
         <input type="submit" value="SUBMIT" name="add_publisher_form">
     </form>
 </div> 
