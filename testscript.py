@@ -31,10 +31,8 @@ def most_reviewed_books():
     for book in book_collection.values():
         book['score'] = book['score'] / book['num_reviews']
 
+    #Sort review books
     sortedDict = []
-    
-    book_collection = book_collection
-    
     while book_collection:
         
         firstKey = list(book_collection.keys())[0]
@@ -53,28 +51,11 @@ def most_reviewed_books():
     for i in sortedDict:
         key = i[0]
         value = i[1]
-        
         book_object = Book.objects.get(pk=key)
         
         value['book_object'] = book_object
         
     return sortedDict
-    # channels = book_collection.OrderedDict(sorted(channels.items(), key=lambda item: item[0]))
-    
-    # print(channels)
-    # best_books = {}
-    
-    # for key,value in book_collection.items():
-    #     print(key)
-    #     book_object = Book.objects.get(key)
-        
-    #     if book_object not in best_books.keys():
-    #         score = value['score']
-
-    #     else:
-    #         best_books[book_object] = value
-    
-
 
 def sort_test():
     
@@ -95,9 +76,65 @@ def sort_test():
 
 def get_author():
     
-    for i in Author.objects.all():
+    book_reviews = BookReview.objects.filter(book__author__isnull=False)
+    # author = book_review.book.author
+    # author_review_query_collection = BookReview.objects.filter(book__author=author)
+    
+    book_collection  = {}
+    for review in book_reviews:
         
-        print(i.id)
-        print(i.image)
+        author = review.book.author
+        author_review_query_collection = BookReview.objects.filter(book__author=author)
+        
+        for author_review in author_review_query_collection:
+            author_book_string = f'author_book; {author_review.book.id}'
+            
+            if author_review.book.author.id in book_collection.keys():
+                book_collection[author_review.book.author.id]['total_author_score'] += review.score    
+                book_collection[author_review.book.author.id]['num_reviews'] += 1
+                book_collection[author_review.book.author.id][author_book_string]['score'] += review.score
+                book_collection[author_review.book.author.id][author_book_string]['num_score'] += 1
+                book_collection[author_review.book.author.id][author_book_string]['avg_score'] = book_collection[author_review.book.author.id][author_book_string]['score'] / book_collection[author_review.book.author.id][author_book_string]['num_score']
+            else:
+                
+                book_collection[author_review.book.author.id] = {}
+                book_collection[author_review.book.author.id]['total_author_score'] = author_review.score
+                book_collection[author_review.book.author.id]['num_reviews'] = 1     
+                book_collection[author_review.book.author.id][author_book_string] = {}
+                book_collection[author_review.book.author.id][author_book_string]['book'] = author_review.book
+                book_collection[author_review.book.author.id][author_book_string]['score'] = author_review.score
+                book_collection[author_review.book.author.id][author_book_string]['num_score'] = 1
+            
+    for book in book_collection.values():
+        book['total_author_score'] = book['total_author_score'] / book['num_reviews']
+        
+    # #Sort review books
+    sortedDict = []
+    
+    
+        
+    firstKey = list(book_collection.keys())[0]
+    
+    authorBooks = []
+    
+    for key in book_collection[firstKey].keys():
+        if 'author_book;' in key:
+            
+            authorBooks.append(book_collection[firstKey][key])
 
-get_author()
+    sorted_books = []
+    while authorBooks:
+        minScore = authorBooks[0]['avg_score']
+        
+        for book in authorBooks:
+            
+            if book['avg_score'] <= minScore:
+                
+                minScore = book['avg_score']
+            
+            sorted_books.append(book)
+            authorBooks.remove(book)
+    
+    return sorted_books[0]
+
+print(get_author())

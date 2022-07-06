@@ -32,9 +32,7 @@ class IndexView(TemplateView):
         
         if 'newsLetterForm' not in kwargs.keys():
             kwargs['newsLetterForm'] = newsLetterForm()
-        
-        
-        print(kwargs['book_collection'])
+    
         
         return kwargs
     

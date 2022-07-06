@@ -34,6 +34,7 @@ class Book(models.Model):
     year = models.DateField()
     author = models.ForeignKey(Author,on_delete=models.SET_NULL,null=True)
     category = models.ManyToManyField(Category)
+    description = models.TextField(max_length=1000,null=True)
     image = models.ImageField(upload_to='book_images')
     
     def __str__(self) -> str:

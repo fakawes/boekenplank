@@ -20,7 +20,7 @@ class contactForm(forms.Form):
 class BookForm(ModelForm):
     class Meta:
         model = Book
-        fields = ['title','publisher','year','author','category','image']
+        fields = ['title','publisher','year','author','category','description','image']
         
         widgets = {
             'category': forms.CheckboxSelectMultiple() 

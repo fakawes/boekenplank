@@ -1,3 +1,4 @@
+from random import random
 from app_boekenplank.models import Book, BookReview, Category, Publisher, Category_test, Author
 from django.db.models import Count
 
@@ -56,9 +57,19 @@ def category_books():
     category_best = {}
     for category in category_collection:    
         category_name = Category.objects.get(id=category['category_id'])
-        
+    
         random_book = Book.objects.filter(category=category_name).order_by('?').first()
-        category_best[category_name] = random_book
+        random_review = BookReview.objects.filter(book=random_book).order_by('?').first()
+        
+        category_best[category_name] = {}
+        category_best[category_name]['book'] = random_book
+        category_best[category_name]['review'] = random_review
+        
+        
+        # print(category_best.keys())
+        
+        
+        # category_best[category_name]['review'] = BookReview.objects.filter(book=random_book).order_by('?').first()
     
     return category_best
 
