@@ -2,10 +2,33 @@
 {% load static %}
 
 {% block title %}Home{% endblock %}
-    <!-- Content -->
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper">
+    
+
+    <div class="hero-content">
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Welcome</h1>
+            </div>
+            <div class="btn-container">
+                <div class="btn">
+                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- Content -->
 {% block content%}
     <div class="content-wrapper">
-        <h1>OurBoeken catalog</h1>
+        <h1>Our Boeken catalog</h1>
         <div class="categories-container">    
             <h3>Categories:</h3>
             <ul class="categories-wrapper">
@@ -31,10 +54,11 @@
                     </div>
                     <div class="item-content-container">
                         <div class="item-title">
-                            {{value.book.score}}
+                            {{value.book.author}}
                         </div>
                         <div class="item-content">
-                            <h2>{{value.score}}</h2>
+                            
+                            <h2>{{value.avg_score}}</h2>
                         </div>
                     </div>
                 </div>
@@ -71,16 +95,16 @@
 
             <div class="item-container"> 
                 <div class="image-container author-image">
-                    <img  class= "item-image" src="/media/{{author.image}}" alt="" srcset="">
+                    <img  class= "item-image" src="/media/{{author.book.author.image}}" alt="" srcset="">
                 </div>
             </div> 
             
             <div class="item-container">
                 <div class="item-content-container about-author">
                     <div class="item-title">
-                        <h3>{{author}}</h3>
+                        <h3>{{author.book.author}}</h3>
                     </div>
-                    <div>{{author.birthday}}</div>
+                    <div>{{author.book.author.birthday}}</div>
                     <div class="item-content">
                         {% if author_book.author.about != None %}
                             <p>{{author_book.author.about}}</p>

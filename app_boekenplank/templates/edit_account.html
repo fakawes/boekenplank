@@ -2,9 +2,37 @@
 {% load static %}
 
 {% block title %}Edit account{% endblock %}
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper">
     
+
+    <div class="hero-content">
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Edit your account</h1>
+            </div>
+            <div class="btn-container">
+                <div class="btn">
+                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
 {% block content%}    
 <div class="content-wrapper">
-    placeholder to edit account
+    <h3>Edit your account info</h3>
+    <form action="" method="POST" enctype="multipart/form-data" class="add-account-form" >
+        {% csrf_token %}
+        {{editAccountForm}}
+        
+        <input type="submit" value="SUBMIT" name="editAccountForm">
+    </form>
 </div>
 {%endblock%}

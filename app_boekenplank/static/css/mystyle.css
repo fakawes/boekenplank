@@ -49,6 +49,21 @@ h1{
     display: flex;
     column-gap: 50px;
 }
+/* <-- social Media icons --> */
+.social-media-icon{
+    max-width: 30px
+}
+.social-media-icon:hover{
+    background-color: var(--main-color-white);
+    border-radius: 25px;
+}
+.social-media-list{
+    display: flex;
+    list-style: none;
+}
+.social-media-item{
+    margin-right: 10px;
+}
 /* <--- Footer  FORM---> */
 
 .footer-form{
@@ -371,7 +386,9 @@ h1{
     margin-left: 0 !important;
     
 }
-
+.page-content{
+    margin-top: 200px !important;
+}
 
 .info-block{
     color:white;
@@ -403,8 +420,33 @@ h1{
     background-color: var(--main-color-black);
     color: var(--main-color-white);
 }
-
-
+/* <-- edit-account form */
+.add-account-form{
+    padding: 40px 0px;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left:30px
+}
+.add-account-form input[type=text], textarea{
+    width:400px;
+    padding: 5px 15px;
+}
+.add-account-form select{
+    width: 200px;
+    padding: 5px 15px;
+}
+.add-account-form input[type=submit]{
+    margin-top: 20px;
+    width: 100px;
+    padding: 5px 15px;
+    background-color: var(--main-color-purple);
+    color: white;
+}
+.add-account-form input[type=submit]:hover{
+    background-color: var(--main-hover-color);
+    transition: 0.3s;
+}
 /* <----- Add Items form ---->*/
 .add-item-form-container{
     margin:30px 100px;

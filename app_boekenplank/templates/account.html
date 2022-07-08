@@ -2,7 +2,30 @@
 {% load static %}
 
 {% block title %}Home{% endblock %}
-    <!-- Content -->
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper">
+    
+
+    <div class="hero-content">
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Welcome</h1>
+            </div>
+            <div class="btn-container">
+                <div class="btn">
+                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- Content -->
 {% block content%}
 
     
@@ -62,5 +85,8 @@
             </div>
             
         </div>
+        <h3><a  href="{% url 'edit-account' %}">EDIT ACCOUNT</a></h3>
     </div>
+
+
 {%endblock%}

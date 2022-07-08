@@ -107,33 +107,9 @@
             </div>
         </div>
     </div>
-    <!-- HERO  -->
-    <div class="hero-wrapper">
-        <!-- MENU -->
-
-        <div class="hero-content">
-
-            <div class="hero-content-wrapper">
-                <div class="text-blok-container">
-                    <h1>CONTENT COMES HERE</h1>
-                </div>
-                <div class="btn-container">
-                    <div class="btn">
-                        <a href="" target="_blank" rel="noopener noreferrer">text</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- HERO VIDEO -->
-        <!-- <div class="hero-video-wrapper">
-            
-            <video autoplay="" muted="" loop="" class="hero-video">
-                <source src="wheat-field.mp4" type="video/mp4">
-            </video>
-        </div> -->
-    </div>
-  
+    {% block hero %}
+ 
+    {% endblock %}
     <!-- Content -->
 
     {% block content%}
@@ -177,10 +153,10 @@
                 <h3>Social Media</h3>
             </div>
             
-            <ul class="link-container">
-                <li class="link">link</li>
-                <li class="link">link</li>
-                <li class="link">link</li>
+            <ul class="social-media-list">
+                <li class="link social-media-item"><a href="https://www.youtube.com/channel/UC6k40PlN3uRLHQY3Eedrn0g"><img src=" /media/socialmedia_icons/youtube.png" class="social-media-icon"></a></li>
+                <li class="link social-media-item"> <a href="https://www.instagram.com/wesselrooth/" target="_blank" rel="noopener noreferrer"><img src=" /media/socialmedia_icons/instagramlogo.png" class="social-media-icon"> </a></li>
+                <li class="link social-media-item"> <a href="https://www.linkedin.com/in/wessel-rooth-683856137/"><img src=" /media/socialmedia_icons/linkedin.png" class="social-media-icon"></a></li>
             </ul>
         </div>
     </div>
