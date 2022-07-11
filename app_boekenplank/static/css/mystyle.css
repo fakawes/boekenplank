@@ -25,7 +25,14 @@ body,html{
 h1{
     margin-bottom: 5px;
 }
-
+/* <--Container sizes --> */
+.container-full-width{
+    width: 100%;
+    display:flex;
+}
+.container-margin-top-botttom{
+    margin: 60px 0px; 
+}
 /* Column sizes */
 .column-40{
     width:40%;
@@ -40,7 +47,9 @@ h1{
 .column-50{
     width: 50%;
 }
-
+.column-75{
+    width: 75%
+}
 .row{
     display: flex;
 }
@@ -48,7 +57,13 @@ h1{
     padding: 50px 0px !important;
     display: flex;
     column-gap: 50px;
+    margin-top: 250px !important;
 }
+.purple-container{
+    background-color: var(--main-color-purple);
+    color:white
+}
+
 /* <-- social Media icons --> */
 .social-media-icon{
     max-width: 30px
@@ -365,7 +380,26 @@ h1{
 .catalog-text{
     line-height: 2;
 }
-
+/* <-- ABOUT --> */
+.about-column{
+    padding: 0px 100px
+}
+.about-image-background{
+    background-repeat: no-repeat;
+    object-position: center;
+    background-position: center;
+    background-size: cover;
+    padding: 169px 50px;
+}
+.about-column-image-left{
+    padding: 0px 50px;
+}
+#about-us-text{
+    background-image: url(/media/istockphoto-1127066336-612x612.jpg);
+}
+#about-us-text-2{
+    background-image: url(/media/istockphoto-1166491178-612x612.jpg);
+}
 /* <------Author highlight blocks */
 .author-grid-container{
     display: grid;
