@@ -581,6 +581,7 @@ h1{
 .contact-form{
     display: flex;
     flex-direction: column;
+    padding-top: 0px;
 }
 /* .contact-form input[type=submit]{
     width:150px;
