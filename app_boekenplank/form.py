@@ -46,7 +46,8 @@ class PublisherForm(ModelForm):
         fields = ['name']
 
 class editAccountForm(ModelForm):
-    
+    username = forms.CharField(label='Username: ')
+    email = forms.EmailField(label='Email: ')
     class Meta:
         model = User
         fields = ['username','email']

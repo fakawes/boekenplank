@@ -18,7 +18,7 @@
     <!-- Header MENU -->
     <div class="row">
         <div class="header-container">
-            <div class="column-40">
+            <div class="column-40 logo-container">
                 
                 <a  class="link" href="{% url 'index' %}"><h1>LOGO WESSEL</h1></a>                 
             </div>
@@ -60,9 +60,9 @@
                                             <i class="fa-solid fa-image-portrait fa-2x p-3 mb-4 tm-about-icon dropdown"></i>
                                             <div class="dropdown-content">  
                                             {%if request.user.is_authenticated %}
-                                                <a  class="link" href="{% url 'account' %}">Account</a>
-                                                <a  class="link" href="{% url 'add_books' %}">Add Book</a>
-                                                <a  class="link" href="/accounts/logout">Logout</a>
+                                                <a  class="link menu-item" href="{% url 'account' %}">Account</a>
+                                                <a  class="link menu-item" href="{% url 'add_books' %}">Add Book</a>
+                                                <a  class="link menu-item" href="/accounts/logout">Logout</a>
                                             {% else %}
                                                 
                                             <a  class="link" href="{% url 'account' %}">Login</a>

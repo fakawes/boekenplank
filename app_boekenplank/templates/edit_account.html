@@ -28,10 +28,15 @@
 {% block content%}    
 <div class="content-wrapper">
     <h3>Edit your account info</h3>
-    <form action="" method="POST" enctype="multipart/form-data" class="add-account-form" >
+    <form action="" method="POST" enctype="multipart/form-data" class="edit-account-form" >
         {% csrf_token %}
-        {{editAccountForm}}
         
+        {% for field in editAccountForm %} 
+            
+            {{field.label}}
+            {{field}}
+            <br>
+        {% endfor%}
         <input type="submit" value="SUBMIT" name="editAccountForm">
     </form>
 </div>
