@@ -329,7 +329,10 @@ h1{
     background-color: var(--main-color-light-blue);
     color: white;
 }
-
+/* <-- No Hero --> */
+.no-hero{
+    margin-top: 150px !important;
+}
 /* BOOK-ITEM */
 .item-grid-container{
     display: grid;
@@ -468,29 +471,30 @@ h1{
     color: var(--main-color-white);
 }
 /* <-- edit-account form */
-.add-account-form{
+.edit-account-form{
     padding: 40px 0px;
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
-    margin-left:30px
+    margin-left:30px;
+    display:flex
 }
-.add-account-form input[type=text], textarea{
+.edit-account-form input[type=text], textarea, input[type=email]{
     width:400px;
     padding: 5px 15px;
 }
-.add-account-form select{
+.edit-account-form select{
     width: 200px;
     padding: 5px 15px;
 }
-.add-account-form input[type=submit]{
+.edit-account-form input[type=submit]{
     margin-top: 20px;
     width: 100px;
     padding: 5px 15px;
     background-color: var(--main-color-purple);
     color: white;
 }
-.add-account-form input[type=submit]:hover{
+.edit-account-form input[type=submit]:hover{
     background-color: var(--main-hover-color);
     transition: 0.3s;
 }
@@ -667,7 +671,16 @@ h1{
 /* Portrait and Landscape */
 @media (max-width: 800px) {
     .item-grid-container { grid-template-columns: repeat(1, 1fr); }
-        
+    #hamburger-menu .menu-item{
+        font-size: x-large;
+    }
+    .logo-container{
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;    
+    }
+    
     .form-submit{
         width:100%;
         margin-left: 0px;

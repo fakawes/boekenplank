@@ -23,7 +23,6 @@ from app_boekenplank.methods import most_reviewed_books, category_books, author_
 class IndexView(TemplateView):
     template_name = 'index.html'
     
-    
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.get_context_data())
     
