@@ -136,16 +136,27 @@ h1{
     top: 0;
     
 }
+/* <-- Hero --> */
 .hero-wrapper{
     position: relative;
     padding: 20% 0px;
-    background-image: url(/media/books-modern_JRZLVU1DKI.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
     margin-top: 127px;
 }
-
+#home-hero{
+    background-image: url(/media/books-modern_JRZLVU1DKI.jpg);
+}
+#about-hero-wrapper{
+    background-image: url(/media/istockphoto-1249818918-612x612.jpg);
+}
+#account-hero{
+    background-image: url(/media/istockphoto-1182032294-612x612.jpg);
+}
+#add-book-hero{
+    background-image: url(/media/istockphoto-1223044293-612x612.jpg);
+}
 .header-container{
     position: fixed;
     width:100%;
@@ -179,7 +190,9 @@ h1{
     height: 720px;
     
 }
-
+.no-hero{
+    margin-top: 100px  !important;
+}
 /* <-------DROP DOWN TEST---------> */
 .dropbtn {
     background-color: #04AA6D;
@@ -565,7 +578,7 @@ h1{
 .contact-container{
     column-gap: 10px
 }
-/* CONTACT FORM  */
+/* <-- CONTACT FORM -->  */
 .contact-row{
     width:50%;
     display: flex;
