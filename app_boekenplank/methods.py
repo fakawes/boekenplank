@@ -66,7 +66,7 @@ def category_books():
     return category_best
 
 def get_author():
-    
+    print('\n--> Get author')
     author = BookReview.objects.filter(book__author__isnull=False).order_by('?').first().book.author
     # author = book_review.book.author
     # author_review_query_collection = BookReview.objects.filter(book__author=author)
@@ -99,15 +99,21 @@ def get_author():
             book_collection[author_review.book.author.id][author_book_string]['book'] = author_review.book
             book_collection[author_review.book.author.id][author_book_string]['score'] = author_review.score
             book_collection[author_review.book.author.id][author_book_string]['num_score'] = 1
+            book_collection[author_review.book.author.id][author_book_string]['avg_score'] = author_review.score
     
     firstKey = list(book_collection.keys())[0]
     authorBooks = []
+    print(book_collection)
+    
     #add book of author to list
     for key in book_collection[firstKey].keys():
+        
+        
         if 'author_book;' in key:
             authorBooks.append(book_collection[firstKey][key])
-
+    print(authorBooks)
     sorted_books = []
+    
     while authorBooks:
         minScore = authorBooks[0]['avg_score']
         
@@ -123,13 +129,6 @@ def get_author():
 
 #return a random book of a author
 def author_books():
-        
-    # book = None
+    pass
+    return 
 
-    # while book == None:
-    #     author = Author.objects.filter().order_by('?').first()
-    #     book = Book.objects.filter(author=author).first()
-    
-    author = Author.objects.get(pk=5)
-    
-    return author

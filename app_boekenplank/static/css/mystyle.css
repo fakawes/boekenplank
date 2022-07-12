@@ -498,6 +498,23 @@ h1{
     background-color: var(--main-hover-color);
     transition: 0.3s;
 }
+.edit-account-button:hover{
+    
+    background-color: #5d62cc80;
+    transition: 0.3s;
+}
+.edit-account-button{
+    margin-top: 20px;
+    width: 150px;
+    padding: 5px 15px;
+    background-color: var(--main-color-purple);
+    color: white;
+}
+.edit-account-button a {
+    color:white;
+    text-decoration: none;
+    
+}
 /* <----- Add Items form ---->*/
 .add-item-form-container{
     margin:30px 100px;

@@ -12,46 +12,6 @@ from django.db.models import Count, Max
 
 
 # return the 
-def most_reviewed_books():
-    
-    book_query_collection = Book.objects.all()
-    book_collection  = {}
-    for book in book_query_collection:
-        bookreviews = book.bookreview_set.filter(book=book)
-        for review in bookreviews:
-            
-            if book.id in book_collection.keys():
-                book_collection[book.id]['score'] += review.score    
-                book_collection[book.id]['num_reviews'] += 1
-                book_collection[book.id]['avg_score'] = book_collection[book.id]['score'] / book_collection[book.id]['num_reviews']
-            else:
-                book_collection[book.id] = {}
-                book_collection[book.id]['score'] = review.score
-                book_collection[book.id]['num_reviews'] = 1             
-    
-    sortedDict = []
-    
-    #sorting method
-    while book_collection:
-        
-        firstKey = list(book_collection.keys())[0]
-        
-        minScore = book_collection[firstKey]['score']
-        
-        for item in book_collection.items():
-            
-            if item[1]['score'] <= minScore:
-                minScore = item[1]['score']
-        
-        #add book_object to dict
-        book_object = Book.objects.get(pk=item[0])
-        item[1]['book'] = book_object
-        
-        sortedDict.append(item)
-                
-        book_collection.pop(firstKey)
-        
-    return sortedDict
 
 def sort_test():
     
@@ -124,4 +84,3 @@ def get_author():
             authorBooks.remove(book)
     return sorted_books[0]
 
-get_author()

@@ -226,12 +226,15 @@ class AddBooks(View, LoginRequiredMixin):
                 context['add_book_form'] = form
         
         if 'add_author_form' in request.POST:
+            print('--> add Author form')
             form  = AuthorForm(request.POST,request.FILES)
 
             if form.is_valid():
+                print('--> FORM VALID')
                 form.save()
                 return redirect('/add_books')
             else:
+                print('--> INVALID')
                 context['add_author_form'] = form
         if 'add_publisher_form' in request.POST:            
             form  = PublisherForm(request.POST)
