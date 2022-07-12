@@ -13,11 +13,11 @@
 
         <div class="hero-content-wrapper">
             <div class="text-blok-container">
-                <h1>Welcome</h1>
+                <h1>Welcome {{request.user.username}}</h1>
             </div>
             <div class="btn-container">
                 <div class="btn">
-                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
+                    <a href="" target="_blank" rel="noopener noreferrer">View your libary</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
 
     
     <div class="content-wrapper">
-        <h1>Welcome  {{request.user.username}}</h1>
+        <h1>Howdy  {{request.user.username}}</h1>
         <h1>Your Boeken catalog</h1>
         <div class="categories-container">    
             <h3>Categories:</h3>
