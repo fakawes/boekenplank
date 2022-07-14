@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from django.views.generic.edit import FormView,CreateView
 from django.views.generic import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.db.models import Count
 
 #custom methods
@@ -47,6 +47,33 @@ class IndexView(TemplateView):
                 context['newsLetterForm'] = form
         
         return render(request,self.template_name, self.get_context_data(**context))   
+
+class BookView(DetailView):
+    template_name = 'book.html'
+    
+    context_object_name = 'book'
+    model = Book
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['now'] = timezone.now()
+        return context
+
+class BookReviewView(DetailView):
+    template_name = 'review.html'
+    context_object_name = 'book'
+    model = BookReview
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+class AuthorView(DetailView):
+    template_name = 'author.html'
+    context_object_name = 'author'
+    model = Author
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
     
 class AboutView(TemplateView):
     template_name = 'about.html'

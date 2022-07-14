@@ -27,6 +27,8 @@
 
 <!-- Content -->
 {% block content%}
+
+
     <div class="content-wrapper">
         <h1>Our Boeken catalog</h1>
         <div class="categories-container">    
@@ -46,16 +48,23 @@
             {%for key, value in book_collection%}
             
                 <div class="item-container">
+                    
+                    
                     <div class="category-item-header">
                         <h2>{{value.book.title}}</h2>
                     </div>
-                    <div class="image-container">
-                        <img  class= "item-image" src="/media/{{value.book.image}}" alt="" srcset="">
-                    </div>
+                    
+                    <a  href="/book/{{value.book.id}}/">
+                        <div class="image-container">                        
+                            <img  class= "item-image" src="/media/{{value.book.image}}" alt="" srcset="">
+                        </div>
+                    </a>
+
                     <div class="item-content-container">
                         <div class="item-title">
                             {{value.book.author}}
                         </div>
+                        <a  class="link" href="/book/{{value.book.id}}">Book</a>
                         <div class="item-content">
                             
                             <h2>{{value.avg_score}}</h2>
@@ -69,26 +78,29 @@
         <h2>Discover a new book</h2>
         <div class="item-grid-container"> 
             {%for category,book in category_collection.items%}
+        
             <div class="item-container">
                 <div class="category-item-header">
-                    <h3>{{book.book}}</h3>
+                    <h3>{{book.book}}</h3>              
                 </div>
-                
-
-                <div class="image-container">
-                    <img  class= "item-image" src="/media/{{book.book.image}}" alt="" srcset="">
-                </div>
+                <a  href="/review/{{book.review.id}}">
+                    <div class="image-container">                
+                        <img  class= "item-image" src="/media/{{book.book.image}}" alt="" srcset="">                    
+                    </div>
+                </a>
                 <div class="item-content-container">
                     <div class="item-content">
                         <p>{{category}}</p>
+                        
                     </div>
                     <div class="item-title">
                         <h3>{{book.review}}</h3>
                     </div>
+                    <a class='review-link' href="/review/{{book.review.id}}">Read more</a>
                 </div>
             </div> 
             {%endfor%}
-            
+
         </div>
         <h2>Discover a new Author</h2>
         <div class="author-grid-container"> 
@@ -103,6 +115,8 @@
                 <div class="item-content-container about-author">
                     <div class="item-title">
                         <h3>{{author.book.author}}</h3>
+                        
+                        <a  href="/author/{{author.book.author.id}}">author</a>
                     </div>
                     <div>{{author.book.author.birthday}}</div>
                     <div class="item-content">
@@ -115,4 +129,6 @@
             </div> 
         </div>
     </div>
+
+
 {%endblock%}

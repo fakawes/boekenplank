@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper" id="home-hero">
+    
+
+    <div class="hero-content" >
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Welcome</h1>
+            </div>
+            <div class="btn-container">
+                <div class="btn">
+                    <a href="" target="_blank" rel="noopener noreferrer">Explore new books to read</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- Content -->
+{% block content%}
+<div class="content-wrapper">
+<h1>{{object}}</h1>    
+    <p>{{object.reviewText}}</p>
+
+</div>
+    
+{%endblock%}

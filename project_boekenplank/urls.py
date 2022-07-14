@@ -31,7 +31,9 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('account/', views.AccountView.as_view(), name='account'),
     path('account/edit', views.EditAccountView.as_view(), name='edit-account'),
-    path('test/',views.CreateCategoryView.as_view()),
+    path('book/<int:pk>/', views.BookView.as_view()),
+    path('review/<int:pk>/', views.BookReviewView.as_view()),
+    path('author/<int:pk>/', views.AuthorView.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
