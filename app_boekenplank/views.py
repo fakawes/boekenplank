@@ -19,7 +19,7 @@ from django.db.models import Count
 #custom methods
 from app_boekenplank.methods import most_reviewed_books, category_books, author_books, get_author
 
-
+#View for the index
 class IndexView(TemplateView):
     template_name = 'index.html'
     
@@ -33,7 +33,6 @@ class IndexView(TemplateView):
         
         if 'newsLetterForm' not in kwargs.keys():
             kwargs['newsLetterForm'] = newsLetterForm()
-        
         return kwargs
     
     def post(self, request, *args, **kwargs):
@@ -48,6 +47,7 @@ class IndexView(TemplateView):
         
         return render(request,self.template_name, self.get_context_data(**context))   
 
+#view for a specific book
 class BookView(DetailView):
     template_name = 'book.html'
     
@@ -57,7 +57,7 @@ class BookView(DetailView):
         context = super().get_context_data(**kwargs)
         # context['now'] = timezone.now()
         return context
-
+#view for a specific review
 class BookReviewView(DetailView):
     template_name = 'review.html'
     context_object_name = 'book'
@@ -65,7 +65,7 @@ class BookReviewView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
-    
+#view for a specific author    
 class AuthorView(DetailView):
     template_name = 'author.html'
     context_object_name = 'author'
@@ -74,7 +74,7 @@ class AuthorView(DetailView):
         context = super().get_context_data(**kwargs)
         return context
     
-    
+#view for a the about page    
 class AboutView(TemplateView):
     template_name = 'about.html'
 
@@ -101,7 +101,7 @@ class AboutView(TemplateView):
         return render(request,self.template_name, self.get_context_data(**context))   
     
 
-
+#View for the Contact page
 class ContactView(TemplateView):
     template_name = 'contact.html'
 
@@ -146,7 +146,7 @@ class CreateCategoryView(CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
-
+#view for a account
 class AccountView(LoginRequiredMixin,TemplateView):
     template_name = 'account.html'
     def get(self, request, *args, **kwargs):
@@ -155,8 +155,6 @@ class AccountView(LoginRequiredMixin,TemplateView):
     def get_context_data(self, **kwargs):
         if 'newsLetterForm' not in kwargs.keys():
             kwargs['newsLetterForm'] = newsLetterForm()
-        
-
         return kwargs
 
     def post(self, request, *args, **kwargs):
@@ -170,6 +168,7 @@ class AccountView(LoginRequiredMixin,TemplateView):
                 context['newsLetterForm'] = form
         return render(request,self.template_name, self.get_context_data(**context))   
 
+#View to edit account settings
 class EditAccountView(View, LoginRequiredMixin):
     
     template_name='edit_account.html'
@@ -199,7 +198,7 @@ class EditAccountView(View, LoginRequiredMixin):
                 print('\n --> NOT' )
         return render(request,self.template_name,self.get_context_data(**context))
     
-# MAAK HIER EEN FORM VIEW VAN
+#View to add Books
 class AddBooks(View, LoginRequiredMixin):
 
     template_name = 'forms/add_books.html'
@@ -277,7 +276,7 @@ class AddBooks(View, LoginRequiredMixin):
             else:
                 context['newsLetterForm'] = form
         return render(request,self.template_name, self.get_context_data(**context))        
-
+#View to login 
 class LoginView(TemplateView):
     template_name='login.html'
     
