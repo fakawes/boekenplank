@@ -25,12 +25,9 @@ def most_reviewed_books():
     
     #sorting method
     while book_collection:
-        
         firstItem = list(book_collection.items())[0]
-
         #loop to check what the lowest book is
         for item in book_collection.items():
-            
             if item[1]['score'] > firstItem[1]['score']:
                 firstItem = item
         
@@ -40,8 +37,6 @@ def most_reviewed_books():
         
         sortedBooks.append(firstItem)
         book_collection.pop(firstItem[0])
-        
-    
     return sortedBooks
     
 #get book of each category, most red first

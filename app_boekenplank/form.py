@@ -1,11 +1,12 @@
 from cProfile import label
+# from sqlite3.dbapi2 import _WindowAggregateClass
 from django import forms
 from dataclasses import field
 from unicodedata import category
 from django.forms import CheckboxSelectMultiple, EmailField, ModelForm, Textarea
 from app_boekenplank.models import Book, BookReview, Author, Publisher, Category, Category_test
 from django.contrib.auth.models import User
-
+from .widgets import DatePickerInput
 
 class newsLetterForm(forms.Form):
     email = forms.EmailField(label='Email')
@@ -16,15 +17,16 @@ class contactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
     # message = forms.Text(label='message')
 
-
 class BookForm(ModelForm):
     class Meta:
         model = Book
         fields = ['title','publisher','year','author','category','description','image']
         
         widgets = {
-            'category': forms.CheckboxSelectMultiple() 
+            'category': forms.CheckboxSelectMultiple(),
+            'year': DatePickerInput(),
         }
+        
 class CategoryForm(ModelForm):
     class Meta:
         model = Category_test
@@ -40,6 +42,11 @@ class AuthorForm(ModelForm):
     class Meta: 
         model = Author
         fields = ['firstname', 'lastname','birthday','image']
+
+        widgets = {
+            'birthday': DatePickerInput()
+        }
+
 class PublisherForm(ModelForm):
     class Meta:
         model = Publisher
@@ -52,4 +59,5 @@ class editAccountForm(ModelForm):
         model = User
         fields = ['username','email']
 
-    
+class ExampleForm(forms.Form):
+    my_date_field = forms.DateField(widget=DatePickerInput)

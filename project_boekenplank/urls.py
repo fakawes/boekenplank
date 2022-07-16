@@ -34,6 +34,7 @@ urlpatterns = [
     path('book/<int:pk>/', views.BookView.as_view()),
     path('review/<int:pk>/', views.BookReviewView.as_view()),
     path('author/<int:pk>/', views.AuthorView.as_view()),
+    path('datepicker/', views.DatePickerView.as_view(), name='datepicker')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
