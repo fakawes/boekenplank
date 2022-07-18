@@ -5,7 +5,7 @@ from urllib import request
 from webbrowser import get
 from django.shortcuts import redirect, render
 #forms
-from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm
+from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm, ExampleForm
 from app_boekenplank.models import Book,BookReview, Author, Category, Publisher, Author
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -287,3 +287,9 @@ class LoginView(TemplateView):
                 context['newsLetterForm'] = form
         return render(request,self.template_name, self.get_context_data(**context))   
    
+
+class DatePickerView(FormView):
+    print('--> datepicker')
+    template_name = 'datepicker.html'
+    form_class = ExampleForm
+    
