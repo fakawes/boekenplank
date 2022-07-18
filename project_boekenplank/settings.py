@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_boekenplank',
-    
+    'bootstrap_datepicker_plus',
+    "bootstrap4",
     'django.contrib.sites',
     'allauth',
     'allauth.account',

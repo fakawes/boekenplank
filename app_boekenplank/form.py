@@ -1,4 +1,5 @@
 from cProfile import label
+from tkinter import Widget
 from django import forms
 from dataclasses import field
 from unicodedata import category
@@ -35,11 +36,16 @@ class ReviewForm(ModelForm):
         model = BookReview
         fields = ['title','reviewText','score','book']
 
-
+class DateInput(forms.DateInput):
+    input_type = 'date'
 class AuthorForm(ModelForm):
     class Meta: 
         model = Author
         fields = ['firstname', 'lastname','birthday','image']
+        
+    widgets = {
+        'birthday': DateInput()
+    }
 class PublisherForm(ModelForm):
     class Meta:
         model = Publisher

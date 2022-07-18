@@ -27,10 +27,45 @@
 
 <!-- Content -->
 {% block content%}
-<div class="content-wrapper">
-<h1>{{object}}</h1>    
-    <p>{{object.reviewText}}</p>
-
-</div>
+<!-- Content -->
+<div class="container-full-width container-margin-top-botttom  purple-container">
+    <div class="column-60 about-column">
+        <div class="text-section">
+            <div class="text-title">
+                <h2>{{object}}</h2>
+            </div>
+            <div class="text-content">
+                <p>{{object.reviewText}}</p>
+            </div>
+        </div>
+    </div>
     
+    <div class="column-50 about-image-background background-contain " style="background-image: url(/media/{{object.book.image}});">
+    </div>
+</div>
+<!-- Author  -->
+<div class="author-grid-container"> 
+    <div class="item-container"> 
+        <div class="image-container author-image">
+            <img  class= "item-image" src="/media/{{object.book.author.image}}" alt="" srcset="">
+        </div>
+    </div> 
+    
+    <div class="item-container">
+        <div class="item-content-container about-author">
+            <div class="item-title">
+                <h3>{{object.book.author}}</h3>
+                
+                <a  href="/author/{{object.book.author.id}}">author</a>
+            </div>
+            <div>{{object.book.author.birthday}}</div>
+            <div class="item-content">
+                {% if object.book.author.about != None %}
+                    <p>{{object.book.author.about}}</p>
+                {%endif%}
+                <p>placeholder about</p>
+            </div>
+        </div>
+    </div> 
+</div>    
 {%endblock%}

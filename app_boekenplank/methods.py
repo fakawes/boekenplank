@@ -4,7 +4,6 @@ from django.db.models import Count
 
 #return random review list of most review book
 def most_reviewed_books():
-    print('\n --> Most revieved Book')
     book_query_collection = Book.objects.all()
     book_collection  = {}
     for book in book_query_collection:

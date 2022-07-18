@@ -28,6 +28,47 @@
 
 <!-- Content -->
 {% block content%}
-    <h1>{{object}}</h1>    
-    <p>{{object.description}}</p>
+<!-- Content -->
+<div class="container-full-width container-margin-top-botttom  purple-container">
+    <div class="column-60 about-column">
+        <div class="text-section">
+            <div class="text-title">
+                <h2>{{object}}</h2>
+            </div>
+            <div class="text-content">
+                <p>{{object.about}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="column-50 about-image-background background-contain " style="background-image: url(/media/{{object.image}});">
+    </div>
+</div>
+<div class="item-grid-container">
+    {%for item in book_collection%}
+                
+        <div class="item-container">
+            <div class="category-item-header">
+                <h2>{{item.title}}</h2>
+            </div>
+            
+            <a  href="/book/{{value.book.id}}/">
+                <div class="image-container">                        
+                    <img  class= "item-image" src="/media/{{item.image}}" alt="" srcset="">
+                </div>
+            </a>
+
+            <div class="item-content-container">
+                <div class="item-title">
+                    {{value.book.author}}
+                </div>
+                <a  class="link" href="/book/{{item.id}}">Book</a>
+                <div class="item-content">
+                    
+                    
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
 {%endblock%}

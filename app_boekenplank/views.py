@@ -19,6 +19,7 @@ from django.db.models import Count
 #custom methods
 from app_boekenplank.methods import most_reviewed_books, category_books, author_books, get_author
 
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 #View for the index
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -72,6 +73,10 @@ class AuthorView(DetailView):
     model = Author
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
+        author = super(AuthorView,self).get_object()
+        book_collection = Book.objects.filter(author=author)
+        context['book_collection'] = book_collection
         return context
     
 #view for a the about page    
@@ -136,18 +141,8 @@ class ContactView(TemplateView):
         return render(request,self.template_name, self.get_context_data(**context))   
 
 
-
-# MAAK HIER EEN FORM VIEW VAN
-class CreateCategoryView(CreateView):
-    template_name = 'forms/form_test.html'
-    form_class = CategoryForm
-    success_url = '/test/'
-    
-    def form_valid(self, form):
-        form.instance.created_by = self.request.user
-        return super().form_valid(form)
 #view for a account
-class AccountView(LoginRequiredMixin,TemplateView):
+class AccountView(TemplateView, LoginRequiredMixin):
     template_name = 'account.html'
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.get_context_data())
@@ -170,19 +165,13 @@ class AccountView(LoginRequiredMixin,TemplateView):
 
 #View to edit account settings
 class EditAccountView(View, LoginRequiredMixin):
-    
     template_name='edit_account.html'
-    
     def get_context_data(self, *args, **kwargs):
-        print('\n --> get context DATA')
-        
         if editAccountForm not in kwargs.keys():
             kwargs['editAccountForm'] = editAccountForm(instance=self.request.user)
-        
         return kwargs
     
     def get(self, request, *args, **kwargs):
-        print('\n--> GET' )
         return render(request, self.template_name, self.get_context_data())
     
     def post(self, request, *arg, **kwargs):
@@ -215,22 +204,21 @@ class AddBooks(View, LoginRequiredMixin):
             
         if 'add_book_form' not in kwargs.keys():     
             kwargs['add_book_form'] = BookForm()       
-        
+            
         if 'add_author_form' not in kwargs.keys():
             kwargs['add_author_form'] = AuthorForm()
-        
+            kwargs['add_author_form'].fields['birthday'].widgets = DateTimePickerInput()
+            
+            
         if 'add_publisher_form' not in kwargs.keys():                
             kwargs['add_publisher_form'] = PublisherForm()
 
         if 'newsLetterForm' not in kwargs.keys():
             kwargs['newsLetterForm'] = newsLetterForm()
-        
-        
         return kwargs
     
     #save the form that is sumbitted    
     def post(self, request, *args, **kwargs):
-        print(request.POST)
         context = {}
         if 'add_review_form' in request.POST:
             form  = ReviewForm(request.POST)
@@ -252,15 +240,15 @@ class AddBooks(View, LoginRequiredMixin):
                 context['add_book_form'] = form
         
         if 'add_author_form' in request.POST:
-            print('--> add Author form')
+            
             form  = AuthorForm(request.POST,request.FILES)
 
             if form.is_valid():
-                print('--> FORM VALID')
+            
                 form.save()
                 return redirect('/add_books')
             else:
-                print('--> INVALID')
+            
                 context['add_author_form'] = form
         if 'add_publisher_form' in request.POST:            
             form  = PublisherForm(request.POST)
