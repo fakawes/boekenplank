@@ -66,12 +66,15 @@
         <h3>Add Author</h3>
 
     </div>
-    
+    <!-- Bootstrap 4 -->
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    {{add_author_form.media}}
 
     <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-author-form">
         {% csrf_token %}
-        {{add_author_form}}
-        
+        {{add_author_form}}        
         <input type="submit" value="SUBMIT" name="add_author_form">
     </form>
 </div>
@@ -86,10 +89,21 @@
     
     <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-publisher-form">
         {% csrf_token %}
-        {{add_publisher_form}}        
+        {% bootstrap_form add_author_form %}        
         <input type="submit" value="SUBMIT" name="add_publisher_form">
     </form>
 </div> 
 
+<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+    </div>
+  </div>
+<script>
+    $(function () {
+      $("#datetimepicker1").datetimepicker();
+    });
+  </script>
 
-{%endblock%}
+{%endblock%}    

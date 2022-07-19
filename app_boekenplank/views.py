@@ -5,7 +5,7 @@ from urllib import request
 from webbrowser import get
 from django.shortcuts import redirect, render
 #forms
-from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm, ExampleForm
+from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm, DateForm
 from app_boekenplank.models import Book,BookReview, Author, Category, Publisher, Author
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -207,7 +207,7 @@ class AddBooks(View, LoginRequiredMixin):
             
         if 'add_author_form' not in kwargs.keys():
             kwargs['add_author_form'] = AuthorForm()
-            kwargs['add_author_form'].fields['birthday'].widgets = DateTimePickerInput()
+            kwargs['add_author_form'].fields['birthday'].widget = DateTimePickerInput()
             
             
         if 'add_publisher_form' not in kwargs.keys():                
@@ -288,8 +288,22 @@ class LoginView(TemplateView):
         return render(request,self.template_name, self.get_context_data(**context))   
    
 
-class DatePickerView(FormView):
-    print('--> datepicker')
+class DatePickerView(TemplateView):
     template_name = 'datepicker.html'
-    form_class = ExampleForm
     
+    
+    def get_context_data(self, **kwargs):
+        context = {}
+        
+        context['add_author_form'] = DateForm()
+        
+        context['add_author_form'].fields['date'].widget = DateTimePickerInput()
+        
+        return context
+    
+    # model = Author
+    # fields = ['birthday']
+    # def get_form(self):
+    #     form = super().get_form()
+    #     form.fields['birthday'].widget = DateTimePickerInput()
+    #     return form

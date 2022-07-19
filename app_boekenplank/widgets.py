@@ -1,6 +1,6 @@
 from django import forms
 
-class DatePickerInput(forms.DateInput):
+class DatePickerInputWidget(forms.DateInput):
     input_type = 'date'       
 
 class TimePickerInput(forms.TimeInput):

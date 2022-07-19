@@ -27,7 +27,6 @@ class Author(models.Model):
     
     def __str__(self) -> str:
         return '{} {}'.format(self.firstname, self.lastname)
-
 class Book(models.Model):
     title = models.CharField(max_length=200,null=True,default='')
     publisher = models.ManyToManyField(Publisher)
@@ -56,3 +55,5 @@ class BookReview(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     def __str__(self) -> str:
         return self.title
+class DateTest(models.Model):
+    date = models.DateField()

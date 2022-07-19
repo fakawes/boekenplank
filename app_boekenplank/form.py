@@ -4,9 +4,11 @@ from django import forms
 from dataclasses import field
 from unicodedata import category
 from django.forms import CheckboxSelectMultiple, EmailField, ModelForm, Textarea
-from app_boekenplank.models import Book, BookReview, Author, Publisher, Category, Category_test
+from app_boekenplank.models import Book, BookReview, Author, Publisher, Category, Category_test, DateTest
 from django.contrib.auth.models import User
-from .widgets import DatePickerInput
+from .widgets import DatePickerInputWidget
+
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 class newsLetterForm(forms.Form):
     email = forms.EmailField(label='Email')
@@ -24,7 +26,7 @@ class BookForm(ModelForm):
         
         widgets = {
             'category': forms.CheckboxSelectMultiple(),
-            'year': DatePickerInput(),
+            'year': DatePickerInputWidget(),
         }
         
 class CategoryForm(ModelForm):
@@ -40,6 +42,8 @@ class ReviewForm(ModelForm):
 class DateInput(forms.DateInput):
     input_type = 'date'
 class AuthorForm(ModelForm):
+    
+    
     class Meta: 
         model = Author
         fields = ['firstname', 'lastname','birthday','image']
@@ -60,5 +64,21 @@ class editAccountForm(ModelForm):
         model = User
         fields = ['username','email']
 
-class ExampleForm(forms.Form):
-    my_date_field = forms.DateField(widget=DatePickerInput)
+class DateForm(forms.Form):
+    date = forms.DateTimeField(
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=forms.DateTimeInput(attrs={
+            'class': 'form-control datetimepicker-input',
+            'data-target': '#datetimepicker1'
+        })
+    )
+class DateForm(ModelForm):
+    
+    
+    class Meta: 
+        model = DateTest
+        fields = ['date']
+
+        widgets = {
+            'date': DatePickerInput()
+        }
