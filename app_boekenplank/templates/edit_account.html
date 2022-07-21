@@ -17,7 +17,7 @@
             </div>
             <div class="btn-container">
                 <div class="btn">
-                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
+                    <a href="info" target="_blank" rel="noopener noreferrer">text</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
 {%endblock%}
 
 {% block content%}    
-<div class="content-wrapper">
+<div class="content-wrapper" id="info">
     <h3>Edit your account info</h3>
     <form action="" method="POST" enctype="multipart/form-data" class="edit-account-form" >
         {% csrf_token %}

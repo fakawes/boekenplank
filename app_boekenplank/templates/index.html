@@ -17,7 +17,7 @@
             </div>
             <div class="btn-container">
                 <div class="btn">
-                    <a href="" target="_blank" rel="noopener noreferrer">Explore new books to read</a>
+                    <a href="#info"  rel="noopener noreferrer">Explore new books to read</a>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
 {% block content%}
 
 
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="info">
         <h1>Our Boeken catalog</h1>
         <div class="categories-container">    
             <h3>Categories:</h3>
@@ -72,20 +72,23 @@
                     </div>
                 </div>
             {%endfor%}
-                        
+
         </div>
 
         <h2>Discover a new book</h2>
         <div class="item-grid-container"> 
-            {%for category,book in category_collection.items%}
+            {%for category,review in category_collection.items%}
         
             <div class="item-container">
+                
+                
                 <div class="category-item-header">
-                    <h3>{{book.book}}</h3>              
+                    <h3>{{review.review.book}}</h3>              
                 </div>
-                <a  href="/review/{{book.review.id}}">
+                <a  href="/review/{{review.review.id}}">
                     <div class="image-container">                
-                        <img  class= "item-image" src="/media/{{book.book.image}}" alt="" srcset="">                    
+                        
+                        <img  class= "item-image" src="/media/{{review.review.book.image}}" alt="" srcset="">                    
                     </div>
                 </a>
                 <div class="item-content-container">
@@ -94,21 +97,44 @@
                         
                     </div>
                     <div class="item-title">
-                        <h3>{{book.review}}</h3>
+                        <h3>{{review.review}}</h3>
+                        <p>{{review.review.reviewText}}</p>
                     </div>
                     <a class='review-link' href="/review/{{book.review.id}}">Read more</a>
                 </div>
             </div> 
             {%endfor%}
+            <!-- Add you book -->
+            <div class="item-container">
+                <div class="category-item-header">
+                    <h3>Write your review</h3>              
+                </div>
+                <a  href="/add_books">
+                    <div class="image-container">                
+                        <img  class= "item-image" src="/media/istockphoto-468420762-612x612.jpg" alt="" srcset="">                    
+                    </div>
+                </a>
+                <div class="item-content-container">
+                    <div class="item-content">
 
+                    </div>
+                    <div class="item-title">
+                        <p>Share you experiences of a book you red</p>
+                        <a class='review-link' href="/add_books">here</a>
+                    </div>
+                    
+                </div>
+            </div> 
         </div>
         <h2>Discover a new Author</h2>
         <div class="author-grid-container"> 
 
             <div class="item-container"> 
-                <div class="image-container author-image">
-                    <img  class= "item-image" src="/media/{{author.book.author.image}}" alt="" srcset="">
-                </div>
+                <a  href="/author/{{author.book.author.id}}" style="flex:1">
+                    <div class="image-container author-image "  style="background-image:url(/media/{{author.book.author.image}})">
+                        
+                    </div>
+                </a>    
             </div> 
             
             <div class="item-container">

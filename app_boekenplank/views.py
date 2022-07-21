@@ -5,7 +5,7 @@ from urllib import request
 from webbrowser import get
 from django.shortcuts import redirect, render
 #forms
-from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm, DateForm
+from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm
 from app_boekenplank.models import Book,BookReview, Author, Category, Publisher, Author
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -142,12 +142,17 @@ class ContactView(TemplateView):
 
 
 #view for a account
-class AccountView(TemplateView, LoginRequiredMixin):
+class AccountView(LoginRequiredMixin, TemplateView):
+    login_url = '/accounts/login/'
     template_name = 'account.html'
+    
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.get_context_data())
 
     def get_context_data(self, **kwargs):
+    
+        kwargs['review_collection'] = BookReview.objects.filter(user=self.request.user)
+    
         if 'newsLetterForm' not in kwargs.keys():
             kwargs['newsLetterForm'] = newsLetterForm()
         return kwargs
@@ -164,10 +169,13 @@ class AccountView(TemplateView, LoginRequiredMixin):
         return render(request,self.template_name, self.get_context_data(**context))   
 
 #View to edit account settings
-class EditAccountView(View, LoginRequiredMixin):
+class EditAccountView(LoginRequiredMixin, View ):
     template_name='edit_account.html'
     def get_context_data(self, *args, **kwargs):
+        print('--> edit account')
         if editAccountForm not in kwargs.keys():
+            print('editAccountForm')
+            print(self.request.user)
             kwargs['editAccountForm'] = editAccountForm(instance=self.request.user)
         return kwargs
     
@@ -188,11 +196,9 @@ class EditAccountView(View, LoginRequiredMixin):
         return render(request,self.template_name,self.get_context_data(**context))
     
 #View to add Books
-class AddBooks(View, LoginRequiredMixin):
-
-    template_name = 'forms/add_books.html'
-    success_url = 'forms/add_books.html'
-    
+class AddBooks(LoginRequiredMixin ,View):
+    template_name = 'add_books.html'
+    success_url = 'add_books.html'    
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.get_context_data())
     
@@ -207,7 +213,7 @@ class AddBooks(View, LoginRequiredMixin):
             
         if 'add_author_form' not in kwargs.keys():
             kwargs['add_author_form'] = AuthorForm()
-            kwargs['add_author_form'].fields['birthday'].widget = DateTimePickerInput()
+            
             
             
         if 'add_publisher_form' not in kwargs.keys():                
@@ -301,9 +307,3 @@ class DatePickerView(TemplateView):
         
         return context
     
-    # model = Author
-    # fields = ['birthday']
-    # def get_form(self):
-    #     form = super().get_form()
-    #     form.fields['birthday'].widget = DateTimePickerInput()
-    #     return form

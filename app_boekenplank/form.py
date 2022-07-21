@@ -26,7 +26,8 @@ class BookForm(ModelForm):
         
         widgets = {
             'category': forms.CheckboxSelectMultiple(),
-            'year': DatePickerInputWidget(),
+            'year': DatePickerInput(format='%Y-%m-%d'),
+            
         }
         
 class CategoryForm(ModelForm):
@@ -39,11 +40,7 @@ class ReviewForm(ModelForm):
         model = BookReview
         fields = ['title','reviewText','score','book']
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
 class AuthorForm(ModelForm):
-    
-    
     class Meta: 
         model = Author
         fields = ['firstname', 'lastname','birthday','image']
@@ -64,21 +61,3 @@ class editAccountForm(ModelForm):
         model = User
         fields = ['username','email']
 
-class DateForm(forms.Form):
-    date = forms.DateTimeField(
-        input_formats=['%d/%m/%Y %H:%M'],
-        widget=forms.DateTimeInput(attrs={
-            'class': 'form-control datetimepicker-input',
-            'data-target': '#datetimepicker1'
-        })
-    )
-class DateForm(ModelForm):
-    
-    
-    class Meta: 
-        model = DateTest
-        fields = ['date']
-
-        widgets = {
-            'date': DatePickerInput()
-        }

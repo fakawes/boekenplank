@@ -50,7 +50,7 @@ h1{
 .column-75{
     width: 75%
 }
-.row{
+.section{
     display: flex;
 }
 .contact-wrapper{
@@ -147,7 +147,7 @@ h1{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    margin-top: 127px;
+    margin-top: 100px;
 }
 #home-hero{
     background-image: url(/media/books-modern_JRZLVU1DKI.jpg);
@@ -164,7 +164,7 @@ h1{
 .header-container{
     position: fixed;
     width:100%;
-    padding: 40px;
+    padding: 0px 40px;
     z-index: 1000;
     color: white;
     background: var(--main-color-purple);
@@ -295,7 +295,7 @@ h1{
 }
 .btn{
     padding: 20px;
-    background: #5d62cc66;
+    background: #5d62cc66 !important;
     width: 150px;
 
     
@@ -336,10 +336,11 @@ h1{
     padding: 5px 30px;
     background-color: var(--main-color-light-blue);
     color: white;
+    min-height: 100px
 }
 /* <-- No Hero --> */
 .no-hero{
-    margin-top: 150px !important;
+    margin-top: 300px !important;
 }
 /* BOOK-ITEM */
 .item-grid-container{
@@ -354,11 +355,13 @@ h1{
     width: 100%;
     position: relative;
     box-shadow: 0 0 10px #000000b0;
+    display: flex;
+    flex-direction: column;
 }
 .image-container{
     position:relative;
     overflow: hidden;
-    padding-top: calc(100% /(16 /9));
+    padding-top: calc(100% /(9 /9));
     background-color: #00000045;
     transition: 0.3s;
 }
@@ -380,6 +383,7 @@ h1{
     color:white;
     padding: 20px 30px 40px 30px;
     background-color: var(--main-color-light-blue);
+    flex: 1;
 }
 .item-title{
     padding-bottom: 20px
@@ -434,6 +438,9 @@ h1{
 }
 .author-image, .about-author{
     height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;;
 }
 /* INFORMATION BLOCKS */
 .footer-block-container{
@@ -459,7 +466,10 @@ h1{
 .link-container{
     list-style: none;
 }
-
+/* input date */
+.input-group{
+    width: auto !important
+}
 /* FORM */
 .form-container{
     margin-top: 20px
@@ -637,7 +647,14 @@ h1{
     width: 60%;
     margin-bottom: 10px;
 }
-
+/* <---- Password reset form --->  */
+.password-reset-form{
+    display:block
+}
+.password-reset-form input[type=submit]{
+    
+    width: 200px
+}
 .google-maps-container{
     width:50%;
     display: flex;
