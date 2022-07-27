@@ -3,10 +3,12 @@ from msilib.schema import Class
 from multiprocessing import context
 from urllib import request
 from webbrowser import get
+from django.http import HttpRequest
 from django.shortcuts import redirect, render
+from django import forms
 #forms
-from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm
-from app_boekenplank.models import Book,BookReview, Author, Category, Publisher, Author
+from app_boekenplank.form import BookForm, ReviewForm, AuthorForm, PublisherForm, CategoryForm, contactForm, newsLetterForm, editAccountForm,ReviewCommentForm
+from app_boekenplank.models import Book,BookReview, Author, Category, Publisher, Author, ReviewComment
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -21,6 +23,7 @@ from app_boekenplank.methods import most_reviewed_books, category_books, author_
 
 from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 #View for the index
+
 class IndexView(TemplateView):
     template_name = 'index.html'
     
@@ -63,9 +66,45 @@ class BookReviewView(DetailView):
     template_name = 'review.html'
     context_object_name = 'book'
     model = BookReview
+    # def get_queryset(self):        
+    #     queryset = BookReview.objects.filter(user=self.request.user)
+    #     return queryset
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        
+        review_object = super(BookReviewView,self).get_object()
+        if review_object.user == self.request.user:
+            kwargs['edit_review'] = True
+        
+        if 'ReviewCommentForm' not in kwargs.keys():
+            kwargs['ReviewCommentForm'] = ReviewCommentForm()
+            # kwargs['ReviewCommentForm'].fields['review'].widget = forms.HiddenInput()
+            # kwargs['ReviewCommentForm'].fields['user'].widget = forms.HiddenInput()
+        
+        comments = ReviewComment.objects.filter(review=review_object)
+        for comment in comments:
+            print(comment.user)
+            print(comment.review)
+
+        kwargs['comment_collection'] = ReviewComment.objects.filter(review=review_object)
+        return kwargs
+    def post(self, request, *args, **kwargs):
+        
+        context = {}
+        if 'ReviewCommentForm' in request.POST:
+        
+            form = ReviewCommentForm(request.POST)
+        
+            if form.is_valid:
+                print('\n--> form Valid')     
+                form_object = form.save(commit=False)
+                form_object.user = self.request.user
+                form_object.review = super(BookReviewView,self).get_object()    
+                form_object.save()
+                url = '/review/{}'.format(super(BookReviewView,self).get_object().id)
+                return redirect(url)
+                
+            else:
+                print('\n --> Not VALID')
 #view for a specific author    
 class AuthorView(DetailView):
     template_name = 'author.html'
@@ -105,7 +144,33 @@ class AboutView(TemplateView):
         
         return render(request,self.template_name, self.get_context_data(**context))   
     
+class EditReviewView(LoginRequiredMixin, DetailView):
+    template_name = 'edit_review.html'
+    def get_queryset(self):        
+        queryset = BookReview.objects.filter(user=self.request.user)
+        return queryset
+    def get_context_data(self, *args, **kwargs):        
+        review = super().get_object()        
+        if 'add_review_form' not in kwargs.keys():
+            kwargs['add_review_form'] = ReviewForm(instance=review)
+            kwargs['add_review_form'].fields['book'].widget = forms.HiddenInput()
+            kwargs['review'] = review
+        return kwargs
+        
+    def post(self, request, *arg, **kwargs):
+        context = {}
+        review = super().get_object()        
+        if 'add_review_form' in request.POST:
 
+            form = ReviewForm(request.POST, instance=review)
+            if form.is_valid():
+            
+                form.save()
+                return redirect('/account')
+            else:
+                context['add_review_form'] = form
+            
+        return render(request,self.template_name, self.get_context_data(**context))   
 #View for the Contact page
 class ContactView(TemplateView):
     template_name = 'contact.html'
@@ -214,8 +279,6 @@ class AddBooks(LoginRequiredMixin ,View):
         if 'add_author_form' not in kwargs.keys():
             kwargs['add_author_form'] = AuthorForm()
             
-            
-            
         if 'add_publisher_form' not in kwargs.keys():                
             kwargs['add_publisher_form'] = PublisherForm()
 
@@ -306,4 +369,10 @@ class DatePickerView(TemplateView):
         context['add_author_form'].fields['date'].widget = DateTimePickerInput()
         
         return context
-    
+
+
+
+def page_not_found_view(request, exception):
+    response = render(request, '404.html')    
+    response.status_code = 404
+    return response

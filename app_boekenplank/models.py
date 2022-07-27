@@ -57,3 +57,11 @@ class BookReview(models.Model):
         return self.title
 class DateTest(models.Model):
     date = models.DateField()
+
+class ReviewComment(models.Model):
+    comment = models.TextField(max_length=200)
+    review = models.ForeignKey(BookReview, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    
+    
+    

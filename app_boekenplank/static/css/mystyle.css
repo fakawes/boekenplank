@@ -33,10 +33,19 @@ h1{
 .container-margin-top-botttom{
     margin: 60px 0px; 
 }
+.container{
+    width: 100%
+}
+.padding-left-right{
+    padding: 0px 100px;
+}
 /* Column sizes */
 .column-40{
     width:40%;
     margin:auto
+}
+.column-50{
+    width:50%
 }
 .column-60{
     width:60%
@@ -79,8 +88,13 @@ h1{
 .social-media-item{
     margin-right: 10px;
 }
-/* <--- Footer  FORM---> */
 
+/* <---- Edit Review Book ------->*/
+.edit-review-book{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+/* <--- Footer  FORM---> */
 .footer-form{
     justify-content: flex-start;
     flex-direction: column;
@@ -100,12 +114,8 @@ h1{
     background-color: var(--main-color-purple);
     color: white;
 }
-.footer-form input[type=submit]{
-    margin-top: 20px;
-    /* width: 100px; */
-    padding: 5px 15px;
-    background-color: var(--main-color-purple);
-    color: white;
+.footer-form input[type=email]{
+    width:100% !important
 }
 .footer-form input[type=submit]:hover{
     background-color: #0000006e;
@@ -291,27 +301,40 @@ h1{
 .btn-container{
     display: flex;
     justify-content: flex-start;
-    
 }
 .btn{
     padding: 20px;
     background: #5d62cc66 !important;
     width: 150px;
-
-    
+    color:white !important;
+}
+.btn:hover{
+   background-color: #00000075 !important
 }
 .btn a {
     color: white;
     text-decoration: none;
 }
+
 .ul-list{
     list-style: inside;
     margin: 10px 20px
 }
-
+/* <-- comments for review --> */
+.review-block{
+    margin: 20px 0px;
+    background-color: #80808021;
+    flex-direction: column;
+}
+.user-comment-container{
+    font-weight: bold;
+}
+.comments-title{
+    width: 100%;
+}
 /* Content */
 .content-wrapper{
-    margin: 0px 100px 0px 100px;
+    margin: 0px 100px;
     padding: 40px 0 40px 0px;
     /* margin-right: 40px; */
     /* margin-top: 40px; */
@@ -384,10 +407,35 @@ h1{
     padding: 20px 30px 40px 30px;
     background-color: var(--main-color-light-blue);
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 .item-title{
     padding-bottom: 20px
 }
+.read-more{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.read-more-link{
+    width: fit-content;
+    padding: 10px 10px;
+    border: 3px solid var(--main-color-purple);
+}
+
+.read-more-link:hover{
+    background-color: #5d62cc5e
+}
+
+.review-link:hover{
+    text-decoration:none;
+}
+.review-link{
+    color:#000000
+}
+
 
 /* CATALOG ITEM CONTAINER */
 .catalog-item-container{

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact{% endblock %}
+
+{%block content%}
+    <!-- Content -->
+    <div class="content-wrapper contact-wrapper no-hero">
+        
+  
+        <div class="contact-row contact-container">
+            <div class="contact-form-container">
+                
+                <div class="form-helptext">
+                    <h1>Edit review</h1>
+                </div>
+            
+                <form action="" method="post" class="contact-form form add-item-form">
+                    {% csrf_token %}
+                    {{add_review_form}}    
+                    <input type="submit" value="Submit" class="form-submit" name="add_review_form">
+                </form>
+            
+            </div>
+        </div>
+        
+        <div class="column-50 edit-review-book" style="background-image:url(/media/{{review.book.image}})">
+        
+        </div>
+    </div>
+{% endblock%}

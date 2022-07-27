@@ -16,9 +16,11 @@
                 <h1>Welcome</h1>
             </div>
             <div class="btn-container">
-                <div class="btn">
-                    <a href="#info"  rel="noopener noreferrer">Explore new books to read</a>
-                </div>
+                <a href="#info"  rel="noopener noreferrer">
+                    <div class="btn">
+                        Explore new books to read
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -100,7 +102,14 @@
                         <h3>{{review.review}}</h3>
                         <p>{{review.review.reviewText}}</p>
                     </div>
-                    <a class='review-link' href="/review/{{book.review.id}}">Read more</a>
+                    <div class="read-more">
+                        <a class='review-link' href="/review/{{review.review.id}}">
+                            <div class="read-more-link">
+                                Read more
+                            </div>
+                        </a>
+                    </div>
+                    
                 </div>
             </div> 
             {%endfor%}
@@ -119,10 +128,17 @@
 
                     </div>
                     <div class="item-title">
-                        <p>Share you experiences of a book you red</p>
-                        <a class='review-link' href="/add_books">here</a>
+                        <h3>Share you experiences of a book you red</h3>  
+                        
+                        <!-- <a class='review-link' href="/add_books">here</a> -->
                     </div>
-                    
+                    <div class="read-more">
+                        <a class='review-link' href="/add_books">
+                            <div class="read-more-link">
+                                here
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div> 
         </div>

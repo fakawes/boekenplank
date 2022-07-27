@@ -4,7 +4,7 @@ from django import forms
 from dataclasses import field
 from unicodedata import category
 from django.forms import CheckboxSelectMultiple, EmailField, ModelForm, Textarea
-from app_boekenplank.models import Book, BookReview, Author, Publisher, Category, Category_test, DateTest
+from app_boekenplank.models import Book, BookReview, Author, Publisher, Category, Category_test, DateTest, ReviewComment
 from django.contrib.auth.models import User
 from .widgets import DatePickerInputWidget
 
@@ -27,9 +27,9 @@ class BookForm(ModelForm):
         widgets = {
             'category': forms.CheckboxSelectMultiple(),
             'year': DatePickerInput(format='%Y-%m-%d'),
-            
         }
         
+
 class CategoryForm(ModelForm):
     class Meta:
         model = Category_test
@@ -61,3 +61,9 @@ class editAccountForm(ModelForm):
         model = User
         fields = ['username','email']
 
+class ReviewCommentForm(ModelForm):
+    class Meta:
+        model = ReviewComment
+        
+        fields = ['comment']
+        
