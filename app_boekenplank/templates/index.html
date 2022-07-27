@@ -50,12 +50,9 @@
             {%for key, value in book_collection%}
             
                 <div class="item-container">
-                    
-                    
                     <div class="category-item-header">
                         <h2>{{value.book.title}}</h2>
                     </div>
-                    
                     <a  href="/book/{{value.book.id}}/">
                         <div class="image-container">                        
                             <img  class= "item-image" src="/media/{{value.book.image}}" alt="" srcset="">
@@ -66,9 +63,9 @@
                         <div class="item-title">
                             {{value.book.author}}
                         </div>
-                        <a  class="link" href="/book/{{value.book.id}}">Book</a>
+                        <a  class="link" href="/book/{{value.book.id}}">Book </a>
                         <div class="item-content">
-                            
+                            <p>avg score</p>
                             <h2>{{value.avg_score}}</h2>
                         </div>
                     </div>
