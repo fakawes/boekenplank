@@ -494,6 +494,19 @@ h1{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;;
+    z-index: -1;
+}
+.author-image-container{
+    background-color: #00000045;
+    transition: 0.3s;
+}
+.author-image-container:hover{
+    background-color: #00000000;
+}
+
+
+.author-image:hover{
+    background-color: #00000000
 }
 /* INFORMATION BLOCKS */
 .footer-block-container{

@@ -55,56 +55,41 @@ def category_books():
         category_best[category_name] = {}
         category_best[category_name]['review'] = random_review
         # category_best[category_name]['review'] = BookReview.objects.filter(book=random_book).order_by('?').first()
-    
     return category_best
 
 def get_author():
-    print('--> Get Author')
+    print('\n--> Get Author')
     author = BookReview.objects.filter(book__author__isnull=False).order_by('?').first().book.author
-    print(author)
     # author = book_review.book.author
     # author_review_query_collection = BookReview.objects.filter(book__author=author)
     book_collection  = {}
     
     author_review_query_collection = BookReview.objects.filter(book__author=author)
-    print(author_review_query_collection)
-    
     
     for author_review in author_review_query_collection:
-        author_book_string = f'author_book; {author_review.book.id}'
         
-        if author_review.book.author.id in book_collection.keys():
+        author_book_string = f'author_book; {author_review.book.id}'
+        author_id = author_review.book.author.id
+        print('--> Book SRTING')
+        print(author_book_string)
+        if author_id not in book_collection.keys():
+            
+            book_collection[author_id] = {}
             #edit total score of author
-            book_collection[author_review.book.author.id]['author_score'] += author_review.score    
-            book_collection[author_review.book.author.id]['num_reviews'] += 1
-            book_collection[author_review.book.author.id]['avg_author_score'] = book_collection[author_review.book.author.id]['author_score'] / book_collection[author_review.book.author.id]['num_reviews']
             
-            if author_book_string in book_collection[author_review.book.author.id].keys():
-                #edit each book for author
-                book_collection[author_review.book.author.id][author_book_string]['score'] += author_review.score
-                book_collection[author_review.book.author.id][author_book_string]['num_score'] += 1
-                book_collection[author_review.book.author.id][author_book_string]['avg_score'] = book_collection[author_review.book.author.id][author_book_string]['score'] / book_collection[author_review.book.author.id][author_book_string]['num_score']
-            else:
-                #add each book for author     
-                book_collection[author_review.book.author.id][author_book_string] = {}
-                book_collection[author_review.book.author.id][author_book_string]['book'] = author_review.book
-                book_collection[author_review.book.author.id][author_book_string]['score'] = author_review.score
-                book_collection[author_review.book.author.id][author_book_string]['num_score'] = 1
-                book_collection[author_review.book.author.id][author_book_string]['avg_score'] = author_review.score
-                
-        else:
-            #information about author
-            book_collection[author_review.book.author.id] = {}
-            book_collection[author_review.book.author.id]['author_score'] = author_review.score 
-            book_collection[author_review.book.author.id]['avg_author_score'] = author_review.score 
-            book_collection[author_review.book.author.id]['num_reviews'] = 1
-            
-            #add each book for author     
-            book_collection[author_review.book.author.id][author_book_string] = {}
-            book_collection[author_review.book.author.id][author_book_string]['book'] = author_review.book
-            book_collection[author_review.book.author.id][author_book_string]['score'] = author_review.score
-            book_collection[author_review.book.author.id][author_book_string]['num_score'] = 1
-            book_collection[author_review.book.author.id][author_book_string]['avg_score'] = author_review.score
+            if author_book_string not in book_collection[author_id].keys():
+                book_collection[author_id][author_book_string] = {}
+
+        book_collection[author_id]['author_score'] =+ author_review.score 
+        book_collection[author_id]['num_reviews'] =+ 1
+        book_collection[author_id]['avg_author_score'] =+ book_collection[author_id]['author_score'] / book_collection[author_id]['num_reviews']
+        
+        #add each book for author     
+        book_collection[author_id][author_book_string] = {}
+        book_collection[author_id][author_book_string]['book'] = author_review.book
+        book_collection[author_id][author_book_string]['score'] =+ author_review.score
+        book_collection[author_id][author_book_string]['num_score'] =+ 1
+        book_collection[author_id][author_book_string]['avg_score'] = book_collection[author_id][author_book_string]['score'] / book_collection[author_id][author_book_string]['num_score']
 
     firstKey = list(book_collection.keys())[0]
     
@@ -115,8 +100,8 @@ def get_author():
         
         if 'author_book;' in key:
             authorBooks.append(book_collection[firstKey][key])
-    sorted_books = []
     
+    sorted_books = []
     while authorBooks:
         minScore = authorBooks[0]['avg_score']
         for book in authorBooks:
