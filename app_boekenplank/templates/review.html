@@ -59,12 +59,15 @@
     {%for comment in comment_collection%}
     <div class="review-container">
         <div class="user-comment-container">
-            {{comment.user}}
+            <h4>{{comment.user}}</h4>
+            
         </div>
         <div class="review-comment-container">
-            {{comment.comment}}
+            <p>{{comment.comment}}</p>
+            
         </div>
     </div>
+    <hr>
     {%endfor%}
     
 </div>

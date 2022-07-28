@@ -363,7 +363,7 @@ h1{
 }
 /* <-- No Hero --> */
 .no-hero{
-    margin-top: 300px !important;
+    margin-top: 150px !important;
 }
 /* BOOK-ITEM */
 .item-grid-container{
@@ -428,7 +428,7 @@ h1{
 .read-more-link:hover{
     background-color: #5d62cc5e
 }
-
+/* <--REVIEW CONTAINER --> */
 .review-link:hover{
     text-decoration:none;
 }
@@ -436,6 +436,11 @@ h1{
     color:#000000
 }
 
+.review-container{
+    padding: 10px 10px;
+    background-color: #5d62cc99;
+
+}    
 
 /* CATALOG ITEM CONTAINER */
 .catalog-item-container{
