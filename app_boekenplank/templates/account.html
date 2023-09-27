@@ -6,19 +6,21 @@
 <!-- HERO  -->
 {%block hero%}
 
-<div class="hero-wrapper">
+<div class="hero-wrapper" id="account-hero">
     
 
     <div class="hero-content">
 
         <div class="hero-content-wrapper">
             <div class="text-blok-container">
-                <h1>Welcome</h1>
+                <h1>Welcome {{request.user.username}}</h1>
             </div>
             <div class="btn-container">
-                <div class="btn">
-                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
-                </div>
+                <a href="#info"  rel="noopener noreferrer"></a>
+                    <div class="btn">
+                        View your libary
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -29,8 +31,8 @@
 {% block content%}
 
     
-    <div class="content-wrapper">
-        <h1>Welcome  {{request.user.username}}</h1>
+    <div class="content-wrapper" id="info">
+        <h1>Howdy  {{request.user.username}}</h1>
         <h1>Your Boeken catalog</h1>
         <div class="categories-container">    
             <h3>Categories:</h3>
@@ -42,50 +44,40 @@
             </ul>
         </div>
         <div class="item-grid-container">
+            {%for review in review_collection%}
+                
             <div class="item-container">
-                <div class="image-container">
-                    <img  class= "item-image" src="/media/book.jpg" alt="" srcset="">
+                <div class="category-item-header">
+                    
+                    <h2>{{review.book.title}}</h2>
                 </div>
-                <div class="item-content-container">
-                    <div class="item-title">
-                        <h3>Title of book</h3>
+                
+                <a  href="/book/{{review.book.id}}/">
+                    <div class="image-container">                        
+                        <img  class= "item-image" src="/media/{{review.book.image}}" alt="" srcset="">
                     </div>
-                    <div class="item-content">
-                        <p>this is a short discription of a book</p>
-                    </div>
-                </div>
-            </div>
+                </a>
 
-            <div class="item-container">
-                <div class="image-container">
-                    <img  class= "item-image" src="/media/book2.jpg" alt="" srcset="">
-                </div>
                 <div class="item-content-container">
                     <div class="item-title">
-                        <h3>Title of book</h3>
+                        {{review.book.author}}
                     </div>
+                    
                     <div class="item-content">
-                        <p>this is a short discription of a book</p>
+                        <h3>{{review}}</h3>
+                        <p>{{review.reviewText}}</p>
+                        
                     </div>
+                    <a  class="link" href="/book/{{review.id}}">Read more</a>   
                 </div>
             </div>
-            
-            <div class="item-container">
-                <div class="image-container">
-                    <img  class= "item-image" src="/media/book3.jpg" alt="" srcset="">
-                </div>
-                <div class="item-content-container">
-                    <div class="item-title">
-                        <h3>Title of book</h3>
-                    </div>
-                    <div class="item-content">
-                        <p>this is a short discription of a book</p>
-                    </div>
-                </div>
-            </div>
+        {%endfor%}
             
         </div>
-        <h3><a  href="{% url 'edit-account' %}">EDIT ACCOUNT</a></h3>
+        <div class="edit-account-button">
+            <a  href="{% url 'edit-account' %}">EDIT ACCOUNT</a>
+        </div>
+        
     </div>
 
 

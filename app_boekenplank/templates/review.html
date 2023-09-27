@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper" id="home-hero">
+    
+
+    <div class="hero-content" >
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Welcome</h1>
+            </div>
+            <div class="btn-container">
+                <div class="btn">
+                    <a href="#info" rel="noopener noreferrer">Explore new books to read</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- Content -->
+{% block content%}
+<!-- Content -->
+<div class="container-full-width container-margin-top-botttom  purple-container" id="info">
+    <div class="column-60 about-column">
+        <div class="text-section">
+            <div class="text-title">
+                <h2>{{object}}</h2>
+            </div>
+            <div class="text-content">
+                <p>{{object.reviewText}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="column-50 about-image-background background-contain " style="background-image: url(/media/{{object.book.image}});">
+    </div>
+    
+</div>
+{%if edit_review == True%}
+    <div class="container-full-width padding-left-right">
+        <div class="edit-account-button ">            
+            <a  href="/review/edit/{{object.id}}">Edit review</a>        
+        </div>    
+    </div>
+{%endif%}
+<div class="container-full-width padding-left-right review-block">
+    <div class="comments-title">
+        <h3>Comments</h3>    
+    </div>
+    
+    {%for comment in comment_collection%}
+    <div class="review-container">
+        <div class="user-comment-container">
+            <h4>{{comment.user}}</h4>
+            
+        </div>
+        <div class="review-comment-container">
+            <p>{{comment.comment}}</p>
+            
+        </div>
+    </div>
+    <hr>
+    {%endfor%}
+    
+</div>
+<div class="container-full-width padding-left-right">
+  
+    <div>            
+        <h3>Add a comment</h3>
+        {%if request.user.is_authenticated %}
+
+            <form action="" method="post" class="contact-form form add-item-form">
+                {% csrf_token %}
+                {{ReviewCommentForm}}
+                <input type="submit" value="SUBMIT" name="ReviewCommentForm">
+            </form>
+        {%else%}
+            <div class="read-more">
+                <a class='review-link' href="/account">
+                    <div class="read-more-link">
+                        LOGIN
+                    </div>
+                </a>
+            </div>
+        {%endif%}
+        
+    </div>    
+</div>
+<!-- Author  -->
+<div class="author-grid-container"> 
+    <div class="item-container"> 
+        <div class="image-container author-image">
+            <img  class= "item-image" src="/media/{{object.book.author.image}}" alt="" srcset="">
+        </div>
+    </div> 
+    
+    <div class="item-container">
+        <div class="item-content-container about-author">
+            <div class="item-title">
+                <h3>{{object.book.author}}</h3>
+                
+                <a  href="/author/{{object.book.author.id}}">author</a>
+            </div>
+            <div>{{object.book.author.birthday}}</div>
+            <div class="item-content">
+                {% if object.book.author.about != None %}
+                    <p>{{object.book.author.about}}</p>
+                {%endif%}
+                <p>placeholder about</p>
+            </div>
+        </div>
+    </div> 
+</div>    
+{%endblock%}

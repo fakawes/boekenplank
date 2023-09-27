@@ -4,20 +4,25 @@
 {% block title %}Add Book{% endblock %}
 <!-- HERO  -->
 {%block hero%}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 
-<div class="hero-wrapper">
+<div class="hero-wrapper" id="add-book-hero">
     
 
     <div class="hero-content">
 
         <div class="hero-content-wrapper">
             <div class="text-blok-container">
-                <h1>Welcome</h1>
+                <h1>Share your book experience </h1>
             </div>
             <div class="btn-container">
-                <div class="btn">
-                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
-                </div>
+                <a href="#info"  rel="noopener noreferrer">
+                    <div class="btn">
+                        Add you red
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -26,7 +31,7 @@
 {% block content%}
 
 
-<div class="add-item-form-container">
+<div class="add-item-form-container" id="info">
     <div class="icon-container">
         
         <i class="fa-solid fa-pen-clip fa-5x p-3 mb-4 add-item-icon" id="add-review-icon"></i>
@@ -66,11 +71,12 @@
         <h3>Add Author</h3>
 
     </div>
-    
+    <!-- Bootstrap 4 -->
+    {{add_author_form.media}}
 
     <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-author-form">
         {% csrf_token %}
-        {{add_author_form }}
+        {{add_author_form}}        
         <input type="submit" value="SUBMIT" name="add_author_form">
     </form>
 </div>
@@ -85,10 +91,9 @@
     
     <form action="" method="post" enctype="multipart/form-data" class="add-item-form" id="add-publisher-form">
         {% csrf_token %}
-        {{add_publisher_form}}        
+        {% bootstrap_form add_publisher_form %}        
         <input type="submit" value="SUBMIT" name="add_publisher_form">
     </form>
 </div> 
 
-
-{%endblock%}
+{%endblock%}    

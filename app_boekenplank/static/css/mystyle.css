@@ -25,11 +25,27 @@ body,html{
 h1{
     margin-bottom: 5px;
 }
-
+/* <--Container sizes --> */
+.container-full-width{
+    width: 100%;
+    display:flex;
+}
+.container-margin-top-botttom{
+    margin: 60px 0px; 
+}
+.container{
+    width: 100%
+}
+.padding-left-right{
+    padding: 0px 100px;
+}
 /* Column sizes */
 .column-40{
     width:40%;
     margin:auto
+}
+.column-50{
+    width:50%
 }
 .column-60{
     width:60%
@@ -40,15 +56,23 @@ h1{
 .column-50{
     width: 50%;
 }
-
-.row{
+.column-75{
+    width: 75%
+}
+.section{
     display: flex;
 }
 .contact-wrapper{
     padding: 50px 0px !important;
     display: flex;
     column-gap: 50px;
+    margin-top: 250px !important;
 }
+.purple-container{
+    background-color: var(--main-color-purple);
+    color:white
+}
+
 /* <-- social Media icons --> */
 .social-media-icon{
     max-width: 30px
@@ -64,22 +88,24 @@ h1{
 .social-media-item{
     margin-right: 10px;
 }
-/* <--- Footer  FORM---> */
 
+/* <---- Edit Review Book ------->*/
+.edit-review-book{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+/* <--- Footer  FORM---> */
 .footer-form{
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
 }
+
 .footer-form input[type=text], textarea{
     padding: 5px 15px;
 }
-.footer-form input[type=submit]{
-    margin-top: 20px;
-    /* width: 100px; */
-    padding: 5px 15px;
-    background-color: var(--main-color-purple);
-    color: white;
+.footer-form input[type=text]{
+    width: 100% !important;
 }
 .footer-form input[type=submit]{
     margin-top: 20px;
@@ -87,6 +113,9 @@ h1{
     padding: 5px 15px;
     background-color: var(--main-color-purple);
     color: white;
+}
+.footer-form input[type=email]{
+    width:100% !important
 }
 .footer-form input[type=submit]:hover{
     background-color: #0000006e;
@@ -121,20 +150,31 @@ h1{
     top: 0;
     
 }
+/* <-- Hero --> */
 .hero-wrapper{
     position: relative;
     padding: 20% 0px;
-    background-image: url(/media/books-modern_JRZLVU1DKI.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    margin-top: 127px;
+    margin-top: 100px;
 }
-
+#home-hero{
+    background-image: url(/media/books-modern_JRZLVU1DKI.jpg);
+}
+#about-hero-wrapper{
+    background-image: url(/media/istockphoto-1249818918-612x612.jpg);
+}
+#account-hero{
+    background-image: url(/media/istockphoto-1182032294-612x612.jpg);
+}
+#add-book-hero{
+    background-image: url(/media/istockphoto-1223044293-612x612.jpg);
+}
 .header-container{
     position: fixed;
     width:100%;
-    padding: 40px;
+    padding: 0px 40px;
     z-index: 1000;
     color: white;
     background: var(--main-color-purple);
@@ -164,7 +204,9 @@ h1{
     height: 720px;
     
 }
-
+.no-hero{
+    margin-top: 100px  !important;
+}
 /* <-------DROP DOWN TEST---------> */
 .dropbtn {
     background-color: #04AA6D;
@@ -249,7 +291,9 @@ h1{
     justify-content: flex-end;
 }
 
-
+.background-contain{
+    background-size: contain !important;
+}
 /* HERO TEXT */
 .text-blok-container{
     margin-bottom: 20px;
@@ -257,25 +301,40 @@ h1{
 .btn-container{
     display: flex;
     justify-content: flex-start;
-    
 }
 .btn{
     padding: 20px;
-    background: #0000005c;
+    background: #5d62cc66 !important;
     width: 150px;
-    
+    color:white !important;
+}
+.btn:hover{
+   background-color: #00000075 !important
 }
 .btn a {
     color: white;
+    text-decoration: none;
 }
+
 .ul-list{
     list-style: inside;
     margin: 10px 20px
 }
-
+/* <-- comments for review --> */
+.review-block{
+    margin: 20px 0px;
+    background-color: #80808021;
+    flex-direction: column;
+}
+.user-comment-container{
+    font-weight: bold;
+}
+.comments-title{
+    width: 100%;
+}
 /* Content */
 .content-wrapper{
-    margin: 0px 100px 0px 100px;
+    margin: 0px 100px;
     padding: 40px 0 40px 0px;
     /* margin-right: 40px; */
     /* margin-top: 40px; */
@@ -300,8 +359,12 @@ h1{
     padding: 5px 30px;
     background-color: var(--main-color-light-blue);
     color: white;
+    min-height: 100px
 }
-
+/* <-- No Hero --> */
+.no-hero{
+    margin-top: 150px !important;
+}
 /* BOOK-ITEM */
 .item-grid-container{
     display: grid;
@@ -315,11 +378,13 @@ h1{
     width: 100%;
     position: relative;
     box-shadow: 0 0 10px #000000b0;
+    display: flex;
+    flex-direction: column;
 }
 .image-container{
     position:relative;
     overflow: hidden;
-    padding-top: calc(100% /(16 /9));
+    padding-top: calc(100% /(9 /9));
     background-color: #00000045;
     transition: 0.3s;
 }
@@ -341,10 +406,41 @@ h1{
     color:white;
     padding: 20px 30px 40px 30px;
     background-color: var(--main-color-light-blue);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 .item-title{
     padding-bottom: 20px
 }
+.read-more{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.read-more-link{
+    width: fit-content;
+    padding: 10px 10px;
+    border: 3px solid var(--main-color-purple);
+}
+
+.read-more-link:hover{
+    background-color: #5d62cc5e
+}
+/* <--REVIEW CONTAINER --> */
+.review-link:hover{
+    text-decoration:none;
+}
+.review-link{
+    color:#000000
+}
+
+.review-container{
+    padding: 10px 10px;
+    background-color: #5d62cc99;
+
+}    
 
 /* CATALOG ITEM CONTAINER */
 .catalog-item-container{
@@ -365,7 +461,26 @@ h1{
 .catalog-text{
     line-height: 2;
 }
-
+/* <-- ABOUT --> */
+.about-column{
+    padding: 0px 100px
+}
+.about-image-background{
+    background-repeat: no-repeat;
+    object-position: center;
+    background-position: center;
+    background-size: cover;
+    padding: 169px 50px;
+}
+.about-column-image-left{
+    padding: 0px 50px;
+}
+#about-us-text{
+    background-image: url(/media/istockphoto-1127066336-612x612.jpg);
+}
+#about-us-text-2{
+    background-image: url(/media/istockphoto-1166491178-612x612.jpg);
+}
 /* <------Author highlight blocks */
 .author-grid-container{
     display: grid;
@@ -376,6 +491,22 @@ h1{
 }
 .author-image, .about-author{
     height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;;
+    z-index: -1;
+}
+.author-image-container{
+    background-color: #00000045;
+    transition: 0.3s;
+}
+.author-image-container:hover{
+    background-color: #00000000;
+}
+
+
+.author-image:hover{
+    background-color: #00000000
 }
 /* INFORMATION BLOCKS */
 .footer-block-container{
@@ -401,7 +532,10 @@ h1{
 .link-container{
     list-style: none;
 }
-
+/* input date */
+.input-group{
+    width: auto !important
+}
 /* FORM */
 .form-container{
     margin-top: 20px
@@ -421,31 +555,49 @@ h1{
     color: var(--main-color-white);
 }
 /* <-- edit-account form */
-.add-account-form{
+.edit-account-form{
     padding: 40px 0px;
     justify-content: flex-start;
     flex-direction: column;
     align-items: flex-start;
-    margin-left:30px
+    margin-left:30px;
+    display:flex
 }
-.add-account-form input[type=text], textarea{
+.edit-account-form input[type=text], textarea, input[type=email]{
     width:400px;
     padding: 5px 15px;
 }
-.add-account-form select{
+.edit-account-form select{
     width: 200px;
     padding: 5px 15px;
 }
-.add-account-form input[type=submit]{
+.edit-account-form input[type=submit]{
     margin-top: 20px;
     width: 100px;
     padding: 5px 15px;
     background-color: var(--main-color-purple);
     color: white;
 }
-.add-account-form input[type=submit]:hover{
+.edit-account-form input[type=submit]:hover{
     background-color: var(--main-hover-color);
     transition: 0.3s;
+}
+.edit-account-button:hover{
+    
+    background-color: #5d62cc80;
+    transition: 0.3s;
+}
+.edit-account-button{
+    margin-top: 20px;
+    width: 150px;
+    padding: 5px 15px;
+    background-color: var(--main-color-purple);
+    color: white;
+}
+.edit-account-button a {
+    color:white;
+    text-decoration: none;
+    
 }
 /* <----- Add Items form ---->*/
 .add-item-form-container{
@@ -531,7 +683,7 @@ h1{
 .contact-container{
     column-gap: 10px
 }
-/* CONTACT FORM  */
+/* <-- CONTACT FORM -->  */
 .contact-row{
     width:50%;
     display: flex;
@@ -547,6 +699,7 @@ h1{
 .contact-form{
     display: flex;
     flex-direction: column;
+    padding-top: 0px;
 }
 /* .contact-form input[type=submit]{
     width:150px;
@@ -560,7 +713,14 @@ h1{
     width: 60%;
     margin-bottom: 10px;
 }
-
+/* <---- Password reset form --->  */
+.password-reset-form{
+    display:block
+}
+.password-reset-form input[type=submit]{
+    
+    width: 200px
+}
 .google-maps-container{
     width:50%;
     display: flex;
@@ -619,7 +779,16 @@ h1{
 /* Portrait and Landscape */
 @media (max-width: 800px) {
     .item-grid-container { grid-template-columns: repeat(1, 1fr); }
-        
+    #hamburger-menu .menu-item{
+        font-size: x-large;
+    }
+    .logo-container{
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;    
+    }
+    
     .form-submit{
         width:100%;
         margin-left: 0px;

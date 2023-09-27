@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper" id="home-hero">
+    
+
+    <div class="hero-content" >
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Welcome</h1>
+            </div>
+            <div class="btn-container">
+                <a href="#info"  rel="noopener noreferrer">
+                    <div class="btn">
+                        
+                        Explore new books to read
+                    </div>
+                    
+                    
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+<!-- Content -->
+{% block content%}
+
+
+ <!-- Content -->
+ <div class="container-full-width container-margin-top-botttom  purple-container" id="info">
+    <div class="column-60 about-column">
+        <div class="text-section">
+            <div class="text-title">
+                <h2>{{object}}</h2>
+            </div>
+            <div class="text-content">
+                <p>{{object.description}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="column-50 about-image-background background-contain " style="background-image: url(/media/{{object.image}});">
+    </div>
+</div>
+<!-- Author  -->
+<div class="author-grid-container"> 
+    <div class="item-container"> 
+        <div class="image-container author-image">
+            <img  class= "item-image" src="/media/{{object.author.image}}" alt="" srcset="">
+        </div>
+    </div> 
+    
+    <div class="item-container">
+        <div class="item-content-container about-author">
+            <div class="item-title">
+                <h3>{{object.author}}</h3>
+                
+                <a  href="/author/{{object.author.id}}">author</a>
+            </div>
+            <div>{{object.author.birthday}}</div>
+            <div class="item-content">
+                {% if object.author.about != None %}
+                    <p>{{object.author.about}}</p>
+                {%endif%}
+                <p>placeholder about</p>
+            </div>
+        </div>
+    </div> 
+</div>
+
+{%endblock%}

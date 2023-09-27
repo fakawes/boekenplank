@@ -1,0 +1,75 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+<!-- HERO  -->
+{%block hero%}
+
+<div class="hero-wrapper" style="background-image:url(/media/istockphoto-468420762-612x612.jpg)">
+    
+
+    <div class="hero-content" >
+
+        <div class="hero-content-wrapper">
+            <div class="text-blok-container">
+                <h1>Welcome</h1>
+            </div>
+            <div class="btn-container">
+                <div class="btn">
+                    <a href="#info" rel="noopener noreferrer">Explore new books to read</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+<!-- Content -->
+{% block content%}
+<!-- Content -->
+<div class="container-full-width container-margin-top-botttom  purple-container" id="info">
+    <div class="column-60 about-column">
+        <div class="text-section">
+            <div class="text-title">
+                <h2>{{object}}</h2>
+            </div>
+            <div class="text-content">
+                <p>{{object.about}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="column-50 about-image-background background-contain " style="background-image: url(/media/{{object.image}});">
+    </div>
+</div>
+<div class="item-grid-container">
+    {%for item in book_collection%}
+                
+        <div class="item-container">
+            <div class="category-item-header">
+                <h2>{{item.title}}</h2>
+            </div>
+            
+            <a  href="/book/{{value.book.id}}/">
+                <div class="image-container">                        
+                    <img  class= "item-image" src="/media/{{item.image}}" alt="" srcset="">
+                </div>
+            </a>
+
+            <div class="item-content-container">
+                <div class="item-title">
+                    {{value.book.author}}
+                </div>
+                <a  class="link" href="/book/{{item.id}}">Book</a>
+                <div class="item-content">
+                    
+                    
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
+{%endblock%}

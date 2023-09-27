@@ -8,19 +8,33 @@
     <link rel="stylesheet" href="">
     <link rel="stylesheet" href="{% static '/assets/css/all.css'%} ">
     <link rel="stylesheet" href="{% static '/css/mystyle.css' %}">
-    
 
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+
+    <!-- Tempus Dominus Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
 
     <title>{%block title%} {% endblock %}</title>
 </head>
 <body>
 
     <!-- Header MENU -->
-    <div class="row">
+    <div class="section">
         <div class="header-container">
-            <div class="column-40">
+            <div class="column-40 logo-container">
                 
-                <a  class="link" href="{% url 'index' %}"><h1>LOGO WESSEL</h1></a>                 
+                <a  class="link" href="{% url 'index' %}"><h1>WR</h1></a>                 
             </div>
             
             <div class="column-60">
@@ -60,9 +74,9 @@
                                             <i class="fa-solid fa-image-portrait fa-2x p-3 mb-4 tm-about-icon dropdown"></i>
                                             <div class="dropdown-content">  
                                             {%if request.user.is_authenticated %}
-                                                <a  class="link" href="{% url 'account' %}">Account</a>
-                                                <a  class="link" href="{% url 'add_books' %}">Add Book</a>
-                                                <a  class="link" href="/accounts/logout">Logout</a>
+                                                <a  class="link menu-item" href="{% url 'account' %}">Account</a>
+                                                <a  class="link menu-item" href="{% url 'add_books' %}">Add Book</a>
+                                                <a  class="link menu-item" href="/accounts/logout">Logout</a>
                                             {% else %}
                                                 
                                             <a  class="link" href="{% url 'account' %}">Login</a>
@@ -139,13 +153,13 @@
 
         <div class="info-block column-25">
             <div class="item-title">
-                <h3>Andere links</h3>
+                <h3>Our Address</h3>
             </div>
             
             <ul class="link-container">
-                <li class="link">link</li>
-                <li class="link">link</li>
-                <li class="link">link</li>
+                <li class="link">Nederland </li>
+                <li class="link">Bron 9</li>
+                <li class="link">1511JJ Oostzaan</li>
             </ul>
         </div>
         <div class="info-block column-25">
@@ -154,9 +168,10 @@
             </div>
             
             <ul class="social-media-list">
-                <li class="link social-media-item"><a href="https://www.youtube.com/channel/UC6k40PlN3uRLHQY3Eedrn0g"><img src=" /media/socialmedia_icons/youtube.png" class="social-media-icon"></a></li>
+                <li class="link social-media-item"><a href="https://github.com/fakawes"target="_blank" ><img src=" /media/socialmedia_icons/github-logo.png" class="social-media-icon"></a></li>
+                <li class="link social-media-item"><a href="https://www.youtube.com/channel/UC6k40PlN3uRLHQY3Eedrn0g" target="_blank"><img src=" /media/socialmedia_icons/youtube.png" class="social-media-icon"></a></li>
                 <li class="link social-media-item"> <a href="https://www.instagram.com/wesselrooth/" target="_blank" rel="noopener noreferrer"><img src=" /media/socialmedia_icons/instagramlogo.png" class="social-media-icon"> </a></li>
-                <li class="link social-media-item"> <a href="https://www.linkedin.com/in/wessel-rooth-683856137/"><img src=" /media/socialmedia_icons/linkedin.png" class="social-media-icon"></a></li>
+                <li class="link social-media-item"> <a href="https://www.linkedin.com/in/wessel-rooth-683856137/" target="_blank"><img src=" /media/socialmedia_icons/linkedin.png" class="social-media-icon"></a></li>
             </ul>
         </div>
     </div>

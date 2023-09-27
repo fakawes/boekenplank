@@ -6,19 +6,21 @@
 <!-- HERO  -->
 {%block hero%}
 
-<div class="hero-wrapper">
+<div class="hero-wrapper" id="home-hero">
     
 
-    <div class="hero-content">
+    <div class="hero-content" >
 
         <div class="hero-content-wrapper">
             <div class="text-blok-container">
                 <h1>Welcome</h1>
             </div>
             <div class="btn-container">
-                <div class="btn">
-                    <a href="" target="_blank" rel="noopener noreferrer">text</a>
-                </div>
+                <a href="#info"  rel="noopener noreferrer">
+                    <div class="btn">
+                        Explore new books to read
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -27,7 +29,9 @@
 
 <!-- Content -->
 {% block content%}
-    <div class="content-wrapper">
+
+
+    <div class="content-wrapper" id="info">
         <h1>Our Boeken catalog</h1>
         
         <div class="categories-container">    
@@ -49,60 +53,109 @@
                     <div class="category-item-header">
                         <h2>{{value.book.title}}</h2>
                     </div>
-                    <div class="image-container">
-                        <img  class= "item-image" src="/media/{{value.book.image}}" alt="" srcset="">
-                    </div>
+                    <a  href="/book/{{value.book.id}}/">
+                        <div class="image-container">                        
+                            <img  class= "item-image" src="/media/{{value.book.image}}" alt="" srcset="">
+                        </div>
+                    </a>
+
                     <div class="item-content-container">
                         <div class="item-title">
                             {{value.book.author}}
                         </div>
+                        <a  class="link" href="/book/{{value.book.id}}">Book </a>
                         <div class="item-content">
-                            
+                            <p>avg score</p>
                             <h2>{{value.avg_score}}</h2>
                         </div>
                     </div>
                 </div>
             {%endfor%}
-                        
+
         </div>
 
         <h2>Discover a new book</h2>
         <div class="item-grid-container"> 
-            {%for category,book in category_collection.items%}
+            {%for category,review in category_collection.items%}
+        
             <div class="item-container">
-                <div class="category-item-header">
-                    <h3>{{book.book}}</h3>
-                </div>
                 
-
-                <div class="image-container">
-                    <img  class= "item-image" src="/media/{{book.book.image}}" alt="" srcset="">
+                
+                <div class="category-item-header">
+                    <h3>{{review.review.book}}</h3>              
                 </div>
+                <a  href="/review/{{review.review.id}}">
+                    <div class="image-container">                
+                        
+                        <img  class= "item-image" src="/media/{{review.review.book.image}}" alt="" srcset="">                    
+                    </div>
+                </a>
                 <div class="item-content-container">
                     <div class="item-content">
                         <p>{{category}}</p>
+                        
                     </div>
                     <div class="item-title">
-                        <h3>{{book.review}}</h3>
+                        <h3>{{review.review}}</h3>
+                        <p>{{review.review.reviewText}}</p>
                     </div>
+                    <div class="read-more">
+                        <a class='review-link' href="/review/{{review.review.id}}">
+                            <div class="read-more-link">
+                                Read more
+                            </div>
+                        </a>
+                    </div>
+                    
                 </div>
             </div> 
             {%endfor%}
-            
+            <!-- Add you book -->
+            <div class="item-container">
+                <div class="category-item-header">
+                    <h3>Write your review</h3>              
+                </div>
+                <a  href="/add_books">
+                    <div class="image-container">                
+                        <img  class= "item-image" src="/media/istockphoto-468420762-612x612.jpg" alt="" srcset="">                    
+                    </div>
+                </a>
+                <div class="item-content-container">
+                    <div class="item-content">
+
+                    </div>
+                    <div class="item-title">
+                        <h3>Share you experiences of a book you red</h3>  
+                        
+                        <!-- <a class='review-link' href="/add_books">here</a> -->
+                    </div>
+                    <div class="read-more">
+                        <a class='review-link' href="/add_books">
+                            <div class="read-more-link">
+                                here
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div> 
         </div>
         <h2>Discover a new Author</h2>
         <div class="author-grid-container"> 
 
-            <div class="item-container"> 
-                <div class="image-container author-image">
-                    <img  class= "item-image" src="/media/{{author.book.author.image}}" alt="" srcset="">
-                </div>
+            <div class="item-container author-image-container" > 
+                <a  href="/author/{{author.book.author.id}}" style="flex:1">
+                    <div class="image-container author-image "  style="background-image:url(/media/{{author.book.author.image}})">
+                        
+                    </div>
+                </a>    
             </div> 
             
             <div class="item-container">
                 <div class="item-content-container about-author">
                     <div class="item-title">
                         <h3>{{author.book.author}}</h3>
+                        
+                        <a  href="/author/{{author.book.author.id}}">author</a>
                     </div>
                     <div>{{author.book.author.birthday}}</div>
                     <div class="item-content">
@@ -115,4 +168,6 @@
             </div> 
         </div>
     </div>
+
+
 {%endblock%}

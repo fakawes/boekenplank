@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<div class="content-wrapper">
+<div class="content-wrapper no-hero">
   <div class="form-helptext">
     {% if process == "connect" %}
 
@@ -20,7 +20,7 @@
     {% endif %}
   </div>
   
-
+  
   <form method="post">
     {% csrf_token %}
     <!-- <button type="submit">{% trans "Continue" %}</button> -->
