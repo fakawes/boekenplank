@@ -56,13 +56,6 @@ def category_books():
         category_best[category_name] = {}
         category_best[category_name]['book'] = random_book
         category_best[category_name]['review'] = random_review
-        
-        
-        # print(category_best.keys())
-        
-        
-        # category_best[category_name]['review'] = BookReview.objects.filter(book=random_book).order_by('?').first()
-    
     return category_best
 
 def get_author():
