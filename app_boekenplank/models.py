@@ -55,6 +55,12 @@ class BookReview(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     def __str__(self) -> str:
         return self.title
+
+    def get_book_url(self):
+        url = '/book/' + str(self.book.id) + '/'
+        return url
+        
+
 class DateTest(models.Model):
     date = models.DateField()
 
@@ -63,5 +69,29 @@ class ReviewComment(models.Model):
     review = models.ForeignKey(BookReview, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     
+    def get_book_url(self):
+        return "HALLO DIT IS DUS EEN LIKE"
     
+    def get_total_likes(self):
+        print('\n -->GET likes tering hond')   
+        
+        print('hallo')
+        
+class Like(models.Model):
+    comment = models.OneToOneField(ReviewComment,related_name="likes",on_delete=models.CASCADE)
+    users = models.ManyToManyField(User)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        str(self.comment.comment)[:30]
+
+class CommandDisLike(models.Model):
+    comment = models.OneToOneField(ReviewComment,on_delete=models.CASCADE)
+    user = models.ManyToManyField(User)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        str(self.comment.comment)[:30]
+

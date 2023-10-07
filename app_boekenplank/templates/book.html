@@ -51,6 +51,72 @@
     <div class="column-50 about-image-background background-contain " style="background-image: url(/media/{{object.image}});">
     </div>
 </div>
+
+{%if edit_review == True%}
+    <div class="container-full-width padding-left-right">
+        <div class="edit-account-button ">            
+            <a  href="/review/edit/{{object.id}}">Edit review</a>        
+        </div>    
+    </div>
+{%endif%}
+<div class="container-full-width padding-left-right review-block">
+    <div class="comments-title">
+        <h3>Comments</h3>    
+    </div>
+    <hr>
+    {%for comment in comment_collection%}
+        
+    <div class="review-container">
+        <div class="user-comment-container">
+            <h4>{{comment.user}}</h4>
+            
+        </div>
+        <div class="review-comment-container">
+            <p>{{comment}}</p>
+            <p>{{comment.reviewText}}</p>
+        </div>
+        <div>
+            
+            <a  href="{{comment.get_book_url}}">
+                like iets
+            </a>
+            
+            
+            
+
+            
+            
+        </div>
+    </div>
+    <hr>
+    {%endfor%}
+    
+</div>
+<div class="container-full-width padding-left-right">
+  
+    <div>            
+        <h3>Add a comment</h3>
+        {%if request.user.is_authenticated %}
+
+            <form action="" method="post" class="contact-form form add-item-form">
+                {% csrf_token %}
+                {{ReviewCommentForm}}
+                <input type="submit" value="SUBMIT" name="ReviewCommentForm">
+            </form>
+        {%else%}
+            <div class="read-more">
+                <a class='review-link' href="/account">
+                    <div class="read-more-link">
+                        LOGIN
+                    </div>
+                </a>
+            </div>
+        {%endif%}
+        
+    </div>    
+</div>
+
+
 <!-- Author  -->
 <div class="author-grid-container"> 
     <div class="item-container"> 

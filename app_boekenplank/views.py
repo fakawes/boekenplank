@@ -58,9 +58,19 @@ class BookView(DetailView):
     context_object_name = 'book'
     model = Book
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        
+        # context = super().get_context_data(**kwargs)
+        book = super(BookView,self).get_object()
+        book_reviews = BookReview.objects.filter(book = book)
+        
+        
+        kwargs['comment_collection'] = book_reviews
+        # print(book_reviews)
         # context['now'] = timezone.now()
-        return context
+        return kwargs
+    
+    def post(self, request, *args, **kwargs):
+        print('--> nu is er een post request')
 #view for a specific review
 class BookReviewView(DetailView):
     template_name = 'review.html'
@@ -70,8 +80,9 @@ class BookReviewView(DetailView):
     #     queryset = BookReview.objects.filter(user=self.request.user)
     #     return queryset
     def get_context_data(self, **kwargs):
-        
+        #pak het opject waar op geklikt wordt
         review_object = super(BookReviewView,self).get_object()
+        
         if review_object.user == self.request.user:
             kwargs['edit_review'] = True
         
@@ -80,15 +91,14 @@ class BookReviewView(DetailView):
             # kwargs['ReviewCommentForm'].fields['review'].widget = forms.HiddenInput()
             # kwargs['ReviewCommentForm'].fields['user'].widget = forms.HiddenInput()
         
-        comments = ReviewComment.objects.filter(review=review_object)
-        for comment in comments:
-            print(comment.user)
-            print(comment.review)
-
-        kwargs['comment_collection'] = ReviewComment.objects.filter(review=review_object)
-        return kwargs
-    def post(self, request, *args, **kwargs):
         
+        
+        
+        kwargs['comment_collection'] = ReviewComment.objects.filter(review=review_object)
+        
+        return kwargs
+    
+    def post(self, request, *args, **kwargs):
         context = {}
         if 'ReviewCommentForm' in request.POST:
         
@@ -105,6 +115,8 @@ class BookReviewView(DetailView):
                 
             else:
                 print('\n --> Not VALID')
+
+
 #view for a specific author    
 class AuthorView(DetailView):
     template_name = 'author.html'
@@ -371,6 +383,8 @@ class DatePickerView(TemplateView):
         return context
 
 
+class UpdateCommentVote(View):
+    print('\n --> JA DE LINK werkt')
 
 def page_not_found_view(request, exception):
     response = render(request, '404.html')    

@@ -55,7 +55,7 @@
     <div class="comments-title">
         <h3>Comments</h3>    
     </div>
-    
+    <hr>
     {%for comment in comment_collection%}
     <div class="review-container">
         <div class="user-comment-container">
@@ -64,6 +64,11 @@
         </div>
         <div class="review-comment-container">
             <p>{{comment.comment}}</p>
+            
+        </div>
+        <div>
+            <a href="{% url 'review_comment_vote'  opition='like' %}">Like</a>
+            {{comment.get_total_likes}}
             
         </div>
     </div>

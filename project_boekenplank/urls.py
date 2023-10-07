@@ -36,7 +36,9 @@ urlpatterns = [
     path('review/edit/<int:pk>/', views.EditReviewView.as_view()),
     
     path('author/<int:pk>/', views.AuthorView.as_view()),
-    path('datepicker/', views.DatePickerView.as_view(), name='datepicker')
+    path('datepicker/', views.DatePickerView.as_view(), name='datepicker'),
+    path('review/<int:comment_id>/<str:opition>', views.UpdateCommentVote.as_view(), name='review_comment_vote'),
+
     
 ]
 handler404 = "app_boekenplank.views.page_not_found_view"
